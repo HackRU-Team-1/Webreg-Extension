@@ -1,0 +1,14 @@
+<DOCTYPE! html>
+<html>
+	<head>
+		<script>
+			function onRequest(request, sender, sendResponse)
+			{
+				alert(request);
+				chrome.pageAction.show(sender.tab.id);
+				sendResponse('test');
+			}
+			chrome.extension.onRequest.addListener(onRequest);
+		</script>		
+	</head>
+</html>
