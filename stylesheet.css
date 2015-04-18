@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 63ce9b1a3bc80c7351932e5ca65b3301d5747246
 @font-face { 
 	font-family: AlternateGothic;
 	src: url('Alternate-Gothic.ttf') format('truetype'); 
@@ -10,3 +13,10 @@
 .popup h3 {
 	font-family: AlternateGothic;
 }
+<<<<<<< HEAD
+=======
+
+body {
+    background-image: url("popupbg.png");
+}
+>>>>>>> 63ce9b1a3bc80c7351932e5ca65b3301d5747246
