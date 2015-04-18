@@ -1,22 +1,26 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 63ce9b1a3bc80c7351932e5ca65b3301d5747246
 @font-face { 
-	font-family: AlternateGothic;
-	src: url('Alternate-Gothic.ttf') format('truetype'); 
+	font-family: 'Alternate-Gothic';
+	font-style: normal;
+	font-weight: normal;
+	src: url('Alternate-Gothic.woff'); 
 }
 
 .popup{
 	background-image: url("popupbg.png");
+	width: 160px;
+	font-family: sans-serif;
+	padding-top: 20px;
+	padding-bottom: 28px;
+	font-size: 20px;
+	font-weight: normal;
 }
-.popup h3 {
-	font-family: AlternateGothic;
-}
-<<<<<<< HEAD
-=======
 
-body {
-    background-image: url("popupbg.png");
+.popup input {
+	margin-left: -6px;
+	margin-right: 16px;
 }
->>>>>>> 63ce9b1a3bc80c7351932e5ca65b3301d5747246
+
+.popup img {
+	padding-bottom: 20px;
+}
