@@ -1,10 +1,12 @@
 
-
 @font-face { 
 	font-family: AlternateGothic;
 	src: url('Alternate-Gothic.ttf') format('truetype'); 
 }
 
-h3 {
+.popup{
+	background-image: url("popupbg.png");
+}
+.popup h3 {
 	font-family: AlternateGothic;
 }
