@@ -5,6 +5,9 @@
   "description": "Top Secret",
   "version": "1.0",
 
+  "homepage_url": "https://sims.rutgers.edu/webreg/",
+		
+  
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"

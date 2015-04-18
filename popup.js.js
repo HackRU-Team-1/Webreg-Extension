@@ -1,1 +1,6 @@
-function fetch_name(ur
+function check() {
+	document.getElementById("myCheck").checked = true;
+}
+function uncheck() {
+	document.getElementById('myCheck").checked = false;
+}
