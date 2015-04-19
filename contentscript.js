@@ -45,18 +45,22 @@ for (i = 0; i < x.length; i++) {
 			console.log(lastName.length);
 			lastName = lastName.toLowerCase();
 			
-			var reComma = lastName.split(",",1);
-			var rePeriod = lastName.split(".",2);
-			if (rePeriod.length < lastName) { //there exists a period in the expression
+			if (lastName == "TBD")
+				continue;
 			
+			var reComma = lastName.split(",",1);
+			if (reComma[0].indexOf(".") != -1) {
+				var rePeriod = lastName.split(".",2); //split on period and space
+				lastName = rePeriod[1]; //This will hold the last name after period and space
+			}
+			else {
+				lastName = reComma[0]; //This will hold the last name before comma (if exists)
 			}
 			
-			//var reComma;
-			//var rePeriod;
+			if (lastName.charAt(0) == " ") {  //To prevent inconsistencies from Webreg
+				lastName = lastName.substring(1, lastName.length);
+			}
 			
-			
-			//var j = 0;
-			//var k = 0;
 			/*while(j < lastName.length && lastName.charAt(j) != ","){
 				j++;
 				if(lastName.charAt(j) == "." && j < lastName.length-1){
