@@ -24,3 +24,83 @@
 .popup img {
 	padding-bottom: 20px;
 }
+.info .text{
+  font-family: "Alternate-Gothic";
+  font-size: 30px;
+  padding-top: 3px;
+}
+
+.score{
+  float:right;
+  padding-left: 10px;
+}
+.info {
+  
+  position: relative;
+  width: 250px;
+  height: 36px;
+  padding: 0px;
+  background: #FFFFFF;
+  border: #C20F2F solid 3px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  
+}
+.info:after{
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 110px;
+  border-style: solid;
+  border-width: 15px 15px 0;
+  border-color: #FFFFFF transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+}
+
+.info:before{
+  content: "";
+  position: absolute;
+  top: 39px;
+  left: 108px;
+  border-style: solid;
+  border-width: 17px 17px 0;
+  border-color: #C20F2F transparent;
+  display: block;
+  width: 0;
+  z-index: 0;
+}
+
+.info #helpfulness {
+  float:left;
+  padding-left: 10px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-width: 0 1px 0 0;
+  padding-right: 10px;
+}
+
+.info #clarity {
+  float:left;
+  padding-left: 10px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-width: 0 1px 0 0;
+  padding-right: 10px;
+}
+
+.info #easiness {
+  float:left;
+  padding-left: 10px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-width: 0 1px 0 0;
+  padding-right: 10px;
+}
+
+.info #link{
+  float:left;
+  margin-left: 8px;
+}
