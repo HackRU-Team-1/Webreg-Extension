@@ -73,8 +73,13 @@ for (i = 0; i < x.length; i++) {
 			
 			
 			link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
-			//score.innerHTML.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
 			
+			/*chrome.runtime.sendMessage({url: link.href}, function(response) {
+				console.log(response.result);
+				console.log("Inside chrome.runtime.sendMessage");
+			});
+			*/
+			/*
 			chrome.runtime.sendMessage({
 				method: 'POST',
 				action: 'xhttp',
@@ -86,13 +91,27 @@ for (i = 0; i < x.length; i++) {
 				console.log(responseText);
 				score.appendChild(link);
 			});
+			*/
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET",link.href, false);
 			
-			//var resultString = httpGet(link.href); //holds String of html at href
-			//var profUrl = getProfessorUrl(resultString);
+			xmlhttp.onreadystatechange=function() {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			  // do stuff here
+			    console.log("Inside onreadystatechange");
+			    var resultString = httpGet(link.href); //holds String of html at href
+				var profUrl = getProfessorUrl(resultString);
 			
-			//link.href = "http://www.ratemyprofessors.com" + responseText;
+				link.href = "http://www.ratemyprofessors.com" + profURL;
+			  }
+			}
 			
-			//score.appendChild(link);
+			/*var resultString = httpGet(link.href); //holds String of html at href
+			var profUrl = getProfessorUrl(resultString);
+			
+			link.href = "https://www.ratemyprofessors.com" + responseText;
+			*/
+			score.appendChild(link);
 			
 			
 			/*score.onclick=function(){

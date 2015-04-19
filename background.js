@@ -1,4 +1,5 @@
-chrome.runtime.onMessage.addListener(function(request, sender, callback) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	console.log("Inside onMessage Listener");
 	if (request.action == "xhttp") {
 		var xhttp = new XMLHttpRequest();
 		var method = request.method ? request.method.toUperrCase() : 'GET';
@@ -28,7 +29,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, callback) {
 		}
 		
         xhttp.send(resultString.substring(start,end));
-		
+		sendresponse({result: resultString.substring(start,end)}); //sends back to the call in contentscript
         return true; // prevents the callback from being called too early on return
     }
 });

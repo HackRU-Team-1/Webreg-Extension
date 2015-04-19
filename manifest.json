@@ -8,6 +8,9 @@
   "permissions": [
         "tabs", "<all_urls>"
   ],
+  "optional_permissions": [
+		"tabs", "webRequest"
+  ],
   "content_scripts": [
     {
 	  "matches": [ "https://sims.rutgers.edu/*", "https://sis.rutgers.edu/*"],
@@ -17,10 +20,7 @@
 	  "run_at": "document_end"
     }
   ],
-  "background": {
-      "scripts": ["background.js"],
-      "persistent": false
-  },
+  
   "browser_action": {
     "default_icon": "logo.png",
     "default_popup": "popup.html"
