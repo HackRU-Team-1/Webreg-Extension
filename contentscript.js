@@ -31,23 +31,46 @@ for (i = 0; i < x.length; i++) {
 			score.style.horizontalAlign = "middle";
 			score.style.verticalAlign = "middle";
 			score.style.paddingTop = "10px";
-			score.style.marginLeft = "30px";
+			score.style.marginLeft = "20px";
 			//score.style.font-size = "15px";
 			//score.href = "#";
 			//score.style = "width:50px;height:50px;border:1px solid #000";
 			score.innerHTML = "5.0";
-			score.style.fontSize = "20px";
+			score.style.fontSize = "15px";
 			//score.style.fontFamily = "Alternate-Gothic";
 			//score.innerHTML.font-style = "bold";
 			// score.value = value from API
-			var lastName = x[i].value.toLowerCase;
-			var i;
-			for(i = 0; i < lastName.length; i++){
-				if(lastName.charAt(i) == ','){
-					lastName = lastName.substring(0,i);
-					break;
+			var lastName = x[i].innerHTML;
+			console.log(lastName);
+			console.log(lastName.length);
+			lastName = lastName.toLowerCase();
+			
+			var reComma = lastName.split(",",1);
+			var rePeriod = lastName.split(".",2);
+			if (rePeriod.length < lastName) { //there exists a period in the expression
+			
+			}
+			
+			//var reComma;
+			//var rePeriod;
+			
+			
+			//var j = 0;
+			//var k = 0;
+			/*while(j < lastName.length && lastName.charAt(j) != ","){
+				j++;
+				if(lastName.charAt(j) == "." && j < lastName.length-1){
+					k=j;
 				}
 			}
+			if(k+2 < lastName.length && k != 0){
+				lastName = lastName.substring(k+2,j);
+			} else{
+				lastName = lastName.substring(k,j);
+			}*/
+			
+			console.log(lastName);
+			console.log(lastName.length);
 			
 			x[i].appendChild(score);
 		}
