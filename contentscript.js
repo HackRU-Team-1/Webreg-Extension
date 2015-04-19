@@ -23,19 +23,19 @@ for (i = 0; i < x.length; i++) {
 			//link.rel = "stylesheet";
 			//link.href = "stylesheet.css";
 			var score = document.createElement("span");
-			score.style.width = "20px";
-			score.style.height = "25px";
+			score.id = "score";
+			score.style.width = "23px";
+			score.style.height = "24px";
 			//score.style.border = "1px";
-			score.style.color = "white";
+			//score.style.color = "white";
 			score.style.background = "#CF1D32";
-			score.style.horizontalAlign = "middle";
-			score.style.verticalAlign = "middle";
+			//score.style.horizontalAlign = "middle";
+			//score.style.verticalAlign = "middle";
 			score.style.paddingTop = "10px";
+			score.style.paddingBottom = "5px";
 			score.style.marginLeft = "20px";
-			//score.style.font-size = "15px";
-			//score.href = "#";
-			//score.style = "width:50px;height:50px;border:1px solid #000";
-			score.innerHTML = "5.0";
+			//score.innerHTML = "5.0";
+			
 			score.style.fontSize = "15px";
 			//score.style.fontFamily = "Alternate-Gothic";
 			//score.innerHTML.font-style = "bold";
@@ -61,6 +61,16 @@ for (i = 0; i < x.length; i++) {
 				lastName = lastName.substring(1, lastName.length);
 			}
 			
+			var link = document.createElement("a");
+			link.innerHTML = "5.0";
+			link.style.color = "#FFFFFF";
+			link.style.horizontalAlign = "middle";
+			link.style.verticalAlign = "middle";
+			link.style.textDecoration = "none";
+			link.marginBottom = "10px";
+			link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
+			//score.innerHTML.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
+			score.appendChild(link);
 			/*while(j < lastName.length && lastName.charAt(j) != ","){
 				j++;
 				if(lastName.charAt(j) == "." && j < lastName.length-1){
@@ -72,6 +82,15 @@ for (i = 0; i < x.length; i++) {
 			} else{
 				lastName = lastName.substring(k,j);
 			}*/
+			
+			/*score.onclick=function(){
+				var win = window.open(text.getchild.href); //PROBLEM HERE: opens link to last professor on page
+				if (win) {
+					win.focus();
+				} else {
+					console.log("heyyyyy");
+				}
+			};*/
 			
 			console.log(lastName);
 			console.log(lastName.length);
