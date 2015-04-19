@@ -11,7 +11,6 @@ for (i = 0; i < x.length; i++) {
 	alert( x.length );
 }
 */
-
 (function refresh() {
     var x = document.getElementsByClassName("instructors");
     var i;
@@ -135,13 +134,13 @@ for (i = 0; i < x.length; i++) {
 	setTimeout(refresh, 1000);
 })();
 
-/*function httpGet(theUrl) {
+function httpGet(theUrl) {
 	var xmlHttp = null;		
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("GET", theUrl, false);
 	xmlHttp.send(null);
 	return xmlHttp.responseText; 
-}*/
+}
 // MAKE THIS SMARTER
 // Right now, get first professor in list
 function getProfessorUrl(resultString) {

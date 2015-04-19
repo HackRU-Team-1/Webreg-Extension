@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
 
-  "name": "Five Point Oh - A Webreg Extension",
-  "description": "Top Secret",
+  "name": "Five Point Oh - A WebReg Extension",
+  "description": "RateMyProfessor Scores on Rutgers' Online Course Registration",
   "icons": {"128": "logo.png"},
-  "version": "1.0",
+  "version": "0.2",
   "permissions": [
         "tabs", "<all_urls>"
   ],
@@ -13,7 +13,7 @@
   ],
   "content_scripts": [
     {
-	  "matches": [ "https://sims.rutgers.edu/*", "https://sis.rutgers.edu/*"],
+	  "matches": [ "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*"],
       
       "css": ["stylesheet.css"],
       "js": ["contentscript.js"],
