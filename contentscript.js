@@ -68,20 +68,32 @@ for (i = 0; i < x.length; i++) {
 			link.style.verticalAlign = "middle";
 			link.style.textDecoration = "none";
 			link.marginBottom = "10px";
+			
+			
+			
+			
 			link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
 			//score.innerHTML.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
-			score.appendChild(link);
-			/*while(j < lastName.length && lastName.charAt(j) != ","){
-				j++;
-				if(lastName.charAt(j) == "." && j < lastName.length-1){
-					k=j;
-				}
-			}
-			if(k+2 < lastName.length && k != 0){
-				lastName = lastName.substring(k+2,j);
-			} else{
-				lastName = lastName.substring(k,j);
-			}*/
+			
+			chrome.runtime.sendMessage({
+				method: 'POST',
+				action: 'xhttp',
+				url: link.href,
+				data: 'q=something'
+			}, function(responseText) {
+				// Callback function to deal with the response
+				link.href = "http://www.ratemyprofessors.com" + responseText;
+				console.log(responseText);
+				score.appendChild(link);
+			});
+			
+			//var resultString = httpGet(link.href); //holds String of html at href
+			//var profUrl = getProfessorUrl(resultString);
+			
+			//link.href = "http://www.ratemyprofessors.com" + responseText;
+			
+			//score.appendChild(link);
+			
 			
 			/*score.onclick=function(){
 				var win = window.open(text.getchild.href); //PROBLEM HERE: opens link to last professor on page
@@ -101,6 +113,31 @@ for (i = 0; i < x.length; i++) {
 	setTimeout(refresh, 1000);
 })();
 
+function httpGet(theUrl) {
+	var xmlHttp = null;		
+	xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET", theUrl, false);
+	xmlHttp.send(null);
+	return xmlHttp.responseText; 
+}
+// MAKE THIS SMARTER
+// Right now, get first professor in list
+function getProfessorUrl(resultString) {
+	var index = resultString.contains("listing PROFESSOR"); //gets index of first occurrence of this class
+	if (index == -1) //if there are no professors in the list, return #
+		return "#";
+		
+	var start = index;
+	for (start; resultString.charAt(start) != "/"; start++) {} //
+	var end = start;
+	while(resultString.charAt(end) != "\""){
+		end++;
+	}
+	return resultString.substring(start,end);
+	
+	
+	return newURL; // Returns URL of best 
+}
 /*
 var list = document.getElementByClassName("tabmenu");
 alert( list.length );
