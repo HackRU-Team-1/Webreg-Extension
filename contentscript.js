@@ -11,6 +11,7 @@ for (i = 0; i < x.length; i++) {
 	alert( x.length );
 }
 */
+
 (function refresh() {
     var x = document.getElementsByClassName("instructors");
     var i;
@@ -24,7 +25,8 @@ for (i = 0; i < x.length; i++) {
 			//link.href = "stylesheet.css";
 			var score = document.createElement("span");
 			score.id = "score";
-			score.style.width = "23px";
+			//score.style.width = "23px";
+			score.style.width = "50px";
 			score.style.height = "24px";
 			//score.style.border = "1px";
 			//score.style.color = "white";
@@ -62,7 +64,8 @@ for (i = 0; i < x.length; i++) {
 			}
 			
 			var link = document.createElement("a");
-			link.innerHTML = "5.0";
+			//link.innerHTML = "5.0";
+			link.innerHTML = "Search";
 			link.style.color = "#FFFFFF";
 			link.style.horizontalAlign = "middle";
 			link.style.verticalAlign = "middle";
@@ -92,7 +95,7 @@ for (i = 0; i < x.length; i++) {
 				score.appendChild(link);
 			});
 			*/
-			var xmlhttp = new XMLHttpRequest();
+			/*var xmlhttp = new XMLHttpRequest();
 			xmlhttp.open("GET",link.href, false);
 			
 			xmlhttp.onreadystatechange=function() {
@@ -105,7 +108,7 @@ for (i = 0; i < x.length; i++) {
 				link.href = "http://www.ratemyprofessors.com" + profURL;
 			  }
 			}
-			
+			*/
 			/*var resultString = httpGet(link.href); //holds String of html at href
 			var profUrl = getProfessorUrl(resultString);
 			

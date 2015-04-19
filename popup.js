@@ -1,6 +1,3 @@
-function check() {
-	document.getElementById("myCheck").checked = true;
-}
-function uncheck() {
-	document.getElementById("myCheck").checked = false;
-}
+$('#myCheck').change(function(){
+  chrome.runtime.sendMessage({method: 'setCheck', css:$(this).val()});
+});

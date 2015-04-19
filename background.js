@@ -1,4 +1,8 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+
+	if(message.method == 'setCheck')
+		checkToggle = message.check;
+	
 	console.log("Inside onMessage Listener");
 	if (request.action == "xhttp") {
 		var xhttp = new XMLHttpRequest();
