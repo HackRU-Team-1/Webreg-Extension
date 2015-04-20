@@ -4,7 +4,7 @@
   "name": "Five Point Oh - A WebReg Extension",
   "description": "RateMyProfessor Scores on Rutgers' Online Course Registration",
   "icons": {"128": "logo.png"},
-  "version": "0.2",
+  "version": "1.0.0.2",
   "permissions": [
         "tabs", "<all_urls>"
   ],
