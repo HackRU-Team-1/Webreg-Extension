@@ -13,6 +13,12 @@ for (i = 0; i < x.length; i++) {
 */
 (function refresh() {
     var x = document.getElementsByClassName("instructors");
+	var iframe = document.getElementById("iframe2"); // for WebReg
+	if (iframe != null) { // if iframe exists (webreg), then get that info
+		var iframewindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
+		x = iframewindow.document.getElementsByClassName("instructors");
+	}
+	//console.log(x.length);
 	var csp = document.getElementsByTagName("td");
 	
 	var onCSP = false;
