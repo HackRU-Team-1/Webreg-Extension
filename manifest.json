@@ -4,7 +4,7 @@
   "name": "Five Point Oh - A WebReg Extension",
   "description": "Places RateMyProfessors scores directly on Rutgers course websites",
   "icons": {"128": "logo.png"},
-  "version": "1.0.0.3",
+  "version": "1.0.0.5",
   "permissions": [
         "tabs", "<all_urls>"
   ],
@@ -13,7 +13,7 @@
 	  "matches": [ "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*"],
       
       "css": ["stylesheet.css"],
-      "js": ["jquery-2.1.3.min.js", "contentscript.js"],
+      "js": [/*"jquery-2.1.3.min.js",*/ "contentscript.js"],
 	  "run_at": "document_end"
     }
   ],

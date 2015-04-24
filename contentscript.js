@@ -22,12 +22,21 @@ for (i = 0; i < x.length; i++) {
 	var csp = document.getElementsByTagName("td");
 	
 	var onCSP = false;
+	var onSOC = false;
+	var onWR = false;
+	
 	var cspArr = Array.prototype.slice.call(csp);
 	
+	if(window.location.href.indexOf("/webreg/") > -1){
+		onWR = true;
+	}	
+	if(window.location.href.indexOf("/soc/") > -1){
+		onSOC = true;
+	}
 	if(window.location.href.indexOf("/csp/") > -1){
-		//console.log("definitely on csp");
 		onCSP = true;
 	}
+	
 	for(var h = 0; h < cspArr.length; h++){
 		if(cspArr[h].getAttribute("title") == "Instructor"){
 			//console.log("found instructor");
