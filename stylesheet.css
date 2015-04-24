@@ -24,7 +24,7 @@
 .popup img {
 	padding-bottom: 20px;
 }
-.info .text{
+.fpo-info-bubble .text{
   font-family: "Alternate-Gothic";
   font-size: 30px;
   padding-top: 3px;
@@ -34,7 +34,7 @@
   float:right;
   padding-left: 10px;
 }
-.info {
+.fpo-info-bubble {
   
   position: relative;
   width: 250px;
@@ -47,7 +47,7 @@
   border-radius: 5px;
   
 }
-.info:after{
+.fpo-info-bubble:after{
   content: "";
   position: absolute;
   bottom: -15px;
@@ -60,7 +60,7 @@
   z-index: 1;
 }
 
-.info:before{
+.fpo-info-bubble:before{
   content: "";
   position: absolute;
   top: 39px;
@@ -73,7 +73,7 @@
   z-index: 0;
 }
 
-.info #helpfulness {
+.fpo-info-bubble #helpfulness {
   float:left;
   padding-left: 10px;
   border-style: solid;
@@ -82,7 +82,7 @@
   padding-right: 10px;
 }
 
-.info #clarity {
+.fpo-info-bubble #clarity {
   float:left;
   padding-left: 10px;
   border-style: solid;
@@ -91,7 +91,7 @@
   padding-right: 10px;
 }
 
-.info #easiness {
+.fpo-info-bubble #easiness {
   float:left;
   padding-left: 10px;
   border-style: solid;
@@ -100,7 +100,7 @@
   padding-right: 10px;
 }
 
-.info #link{
+.fpo-info-bubble #link{
   float:left;
   margin-left: 8px;
 }
