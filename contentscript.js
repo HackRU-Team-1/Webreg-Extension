@@ -106,6 +106,33 @@ for (i = 0; i < x.length; i++) {
 			
 			
 			link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
+			/*$.ajax({
+				url: link.href,
+			 
+				// The name of the callback parameter, as specified by the YQL service
+				jsonp: "callback",
+			 
+				// Tell jQuery we're expecting JSONP
+				dataType: "jsonp",
+			 
+				// Tell YQL what we want and that we want JSON
+				data: {
+					q: "select title,abstract,url from search.news where query=\"cat\"",
+					format: "json"
+				},
+			 
+				// Work with the response
+				success: function( response ) {
+					console.log( response ); // server response
+				}
+			});
+			*/
+			// This command will go to eventPage and send oldURL
+					
+			chrome.runtime.sendMessage({oldURL: link.href}, function(response) {
+				console.log(response.newURL); //should print newURL in console
+			});
+			
 			link.target = "_blank";
 			/*chrome.runtime.sendMessage({url: link.href}, function(response) {
 				console.log(response.result);
