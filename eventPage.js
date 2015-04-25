@@ -25,6 +25,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 	
 	var responseArr = findScores(ratingsLink);
+	
+	//If rateMyProf profile exists, but has not been created
+	if (responseArr[0] == "not found") {
+		sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: request.lastName, newURL: request.oldURL, isMatch: false});
+	}
 	/*alert("made it!");
 	alert(responseArr[0]);
 	alert(responseArr[1]);
@@ -110,7 +115,7 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 function findScores(myURL) {
 	//alert(myURL);
 	var xmlhttp = new XMLHttpRequest();
-	var responseArr;
+	var responseArr = ["not found", "not found"];
 	xmlhttp.onreadystatechange=function()
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -130,6 +135,12 @@ function findScores(myURL) {
 			
 			// First we get the overall grade and average grade
 			var grades = div.getElementsByClassName("grade");
+			
+			if (grades.length == 0) { // Their page has not been setup yet (no comments, grades, photos, etc
+				responseArr = ["not found", "not found"];
+				return;
+			}
+			
 			mainScore = grades[0].innerHTML;
 			avGrade = grades[1].innerHTML;
 			

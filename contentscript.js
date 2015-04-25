@@ -112,7 +112,8 @@
 				score.style.marginLeft = "20px";
 			}else if (onCSP){
 				score.id = "score";
-				score.style.width = "50px";
+				score.style.width = "24px";
+				//score.style.width = "50px";
 				score.style.height = "24px";
 				score.style.background = "#CF1D32";
 				score.style.paddingTop = "10px";
@@ -143,12 +144,6 @@
 			//Else, remove all punctuation
 			var firstInitial = "not found";
 			var reComma = lastName.split(",");
-			
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// !!!!!!!!!!!!!!!!!!!!THIS FIRSTINITIAL FINDER DOES NOT WORK. REWORK THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			
 			//reComma is now an array, holding the two halves of the lastName, split around a comma. We use [0] in the next line to access the first half
 			//Case 3
@@ -210,7 +205,7 @@
 					links[linkIndex].href = response.newURL;					
 				} else {
 					links[linkIndex].href = response.newURL;
-					links[linkIndex].innerHTML = "X";	
+					links[linkIndex].innerHTML = "?.?";	
 				}
 				console.log(linkIndex);
 				linkIndex++;
@@ -234,7 +229,7 @@
 			
 		}
     }	
-	setTimeout(refresh, 1);
+	setTimeout(refresh, 10);
 })();
 
 function sleep(milliseconds) {
