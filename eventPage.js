@@ -134,4 +134,4 @@ function findScores(myURL) {
 		return xmlhttp.onreadystatechange();
 
 	}
-}
+
