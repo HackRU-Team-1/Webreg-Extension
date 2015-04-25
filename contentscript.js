@@ -1,13 +1,13 @@
 (function refresh() {
-    var x = document.getElementsByClassName("instructors");
+    var instructors = document.getElementsByClassName("instructors");
 	var iframe = document.getElementById("iframe2"); // for WebReg
 	if (iframe != null) { // if iframe exists (w++ebreg), then get that info
 		var iframewindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
-		x = iframewindow.document.getElementsByClassName("instructors");
+		instructors = iframewindow.document.getElementsByClassName("instructors");
 	}
 	
 	
-	//console.log(x.length);
+	//console.log(instructors.length);
 	var csp = document.getElementsByTagName("td");
 	
 	//Checks what website we're on
@@ -28,7 +28,7 @@
 	
 	//Creates list based on current website
 	if(onSOC){
-		var x = document.getElementsByClassName("instructors");
+		var instructors = document.getElementsByClassName("instructors");
 	}
 	
 	//Webreg requires access to an iframe
@@ -39,19 +39,19 @@
 		var iframe = document.getElementById("iframe2");		
 		if (iframe != null) {
 			var iframewindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
-			x = iframewindow.document.getElementsByClassName("instructors");
+			instructors = iframewindow.document.getElementsByClassName("instructors");
 		}		
 	}
 	
 	//If on CSP, has to get td elements and filter out non-instructors instead
 	if(onCSP){
 		var csp = document.getElementsByTagName("td");	
-		x = Array.prototype.slice.call(csp);		
-		for(var h = 0; h < x.length; h++){
-			if(x[h].getAttribute("title") == "Instructor"){
+		instructors = Array.prototype.slice.call(csp);		
+		for(var h = 0; h < instructors.length; h++){
+			if(instructors[h].getAttribute("title") == "Instructor"){
 				continue;
 			}
-			x.splice(h, 1);
+			instructors.splice(h, 1);
 			if(h>0){
 				h--;
 			}
@@ -92,8 +92,8 @@
 	var check = 0;
     console.log( "refreshed");	
 	//Loop through list that was chosen above
-    for (i = 0; (x!=null) && i < x.length; i++) {
-	    if (x[i].hasChildNodes() && x[i].childNodes.length < 2) {
+    for (i = 0; (instructors!=null) && i < instructors.length; i++) {
+	    if (instructors[i].hasChildNodes() && instructors[i].childNodes.length < 2) {
 			
 			//This element will hold the instructors score
 			var score = document.createElement("span");
@@ -122,7 +122,7 @@
 			score.style.fontSize = "15px";
 			
 			//Get lastname from current element
-			var lastName = x[i].innerHTML;
+			var lastName = instructors[i].innerHTML;
 			//console.log(lastName);
 			//console.log(lastName.length);
 			lastName = lastName.toLowerCase();
@@ -180,7 +180,7 @@
 			link.style.horizontalAlign = "middle";
 			link.style.verticalAlign = "middle";
 			link.style.textDecoration = "none";
-			link.marginBottom = "10px";			
+			link.marginBottom = "10px";
 			
 			/*link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";*/
 			link.href = null;
@@ -212,7 +212,7 @@
 			//console.log(lastName.length);
 			
 			//Add the score to the instructors
-			x[i].appendChild(score);
+			instructors[i].appendChild(score);
 		}
     }	
 	setTimeout(refresh, 1000);
