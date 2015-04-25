@@ -9,7 +9,7 @@
 
 
   "permissions": [
-        "tabs", "<all_urls>"
+        "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*"
   ],
   "content_scripts": [
     {
