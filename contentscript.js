@@ -215,7 +215,7 @@
 			instructors[i].appendChild(score);
 		}
     }	
-	setTimeout(refresh, 1000);
+	setTimeout(refresh, 100);
 })();
 
 function sleep(milliseconds) {
