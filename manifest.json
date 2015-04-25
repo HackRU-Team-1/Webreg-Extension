@@ -7,7 +7,6 @@
 
   "version": "1.0.0.5",
 
-
   "permissions": [
         "tabs", "<all_urls>"
   ],

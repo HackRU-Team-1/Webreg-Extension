@@ -1,51 +1,10 @@
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	/*
-	$.get(request.oldURL, function(responseText) {
-		var index = responseText.contains("listing PROFESSOR"); //gets index of first occurrence of this class
-		alert(index);
-		alert(responseText);
-	});
-	*/
-	/*
-	var data1 = 0;
-	$.ajax({ url: request.oldURL, success: function(data) {
-		alert(data);
-		sendResponse({newURL: data});
-		data1 = data;
-		//myFunction(myArr);
-	} });
-	*/
-	/*
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', request.oldURL, true);
-	xhr.send(null);
-	alert(xhr.responseText); 
-	*/
-	/*
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange=function()
-	{
-		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-			alert(xmlhttp.responseText);
-			//return xmlhttp.responseText;
-			sender(xmlhttp.responseText);
-		}
-	};
-	xmlhttp.open("GET", request.oldURL, false );
-	xmlhttp.send();  
-	
-	function mySender(data) {
-		alert(data);
-	}
-	*/
-	
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {	
 	var newURL = httpGet(request.oldURL);
 	
-	alert(newURL); //THIS ALERT WORKS
+	//alert(newURL); //THIS ALERT WORKS
 	// newURL isn't a string....?
-	var index = newURL.contains("listing PROFESSOR");
-	alert(index); 
+	//var index = newURL.contains("listing PROFESSOR");
+	//alert(index); 
 	//document.write(httpGet(request.oldURL));
 	//console.log("We're outside function");
 	//console.log(document.getElementsByClassName("listing PROFESSOR"));
@@ -53,7 +12,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	//console.log(newHTML.getElementsByClassName("listing PROFESSOR"));
 	
 	//document.write(httpGet(request.oldURL));
-	sendResponse({newURL: "hulloh"});
+	sendResponse({newURL: newURL});
 	
 });
 
@@ -65,6 +24,17 @@ function httpGet(myURL) {
 			{
 				//alert(xmlhttp.responseText);
 				//alert(xmlhttp.responseXML);
+				
+				/* make fake div, search through it */
+				var div = document.createElement('div');
+				div.innerHTML = xmlhttp.responseText;
+				
+				var listingProfs = div.getElementsByClassName("listing PROFESSOR");
+				
+				var showRatingsLink = listingProfs[0].getElementsByTagName("a")[0].getAttribute("href");
+				
+				alert(showRatingsLink);
+				
 				return xmlhttp.responseText;
 			}
 		}

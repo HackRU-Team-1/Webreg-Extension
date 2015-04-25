@@ -14,7 +14,7 @@ for (i = 0; i < x.length; i++) {
 (function refresh() {
     var x = document.getElementsByClassName("instructors");
 	var iframe = document.getElementById("iframe2"); // for WebReg
-	if (iframe != null) { // if iframe exists (webreg), then get that info
+	if (iframe != null) { // if iframe exists (w++ebreg), then get that info
 		var iframewindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
 		x = iframewindow.document.getElementsByClassName("instructors");
 	}
@@ -139,7 +139,7 @@ for (i = 0; i < x.length; i++) {
 			// This command will go to eventPage and send oldURL
 					
 			chrome.runtime.sendMessage({oldURL: link.href}, function(response) {
-				console.log(response.newURL); //should print newURL in console
+				//alert(showRatingsLink); //should print newURL in console
 			});
 			
 			link.target = "_blank";
