@@ -92,6 +92,8 @@
 	var check = 0;
     console.log( "refreshed");	
 	//Loop through list that was chosen above
+	var links = new Array();
+	var linkIndex = 0;
     for (i = 0; (instructors!=null) && i < instructors.length; i++) {
 	    if (instructors[i].hasChildNodes() && instructors[i].childNodes.length < 2) {
 			
@@ -138,7 +140,7 @@
 			//2. If it is formatted as LASTNAME
 			//3. If it is formatted as FIRSTINITIAL. LASTNAME
 			//Else, remove all punctuation
-			var firstInitial = "";
+			var firstInitial = "undefined";
 			var reComma = lastName.split(",");
 			
 			//reComma is now an array, holding the two halves of the lastName, split around a comma. We use [0] in the next line to access the first half
@@ -183,25 +185,36 @@
 			link.marginBottom = "10px";
 			
 			/*link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";*/
-			link.href = null;
-			var link1 = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
 			
+			var link1 = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
+			link.href = link1;
+			links.push(link);
 			//alert("right before eventPage");
 			
 			//console.log(lastName + " " + firstInitial + " " + departmentName);
-			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + check);
+			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex);
+			//linkIndex++;
 			chrome.runtime.sendMessage({oldURL: link1, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
 				//alert(showRatingsLink); //should print newURL in console
 				//alert("after eventPage");
 				//alert(response.mainScore);
-				link.innerHTML = response.mainScore;
-				link.href = response.newURL;
-				check++;
-				console.log("2: " + lastName + " " + link.innerHTML + " : " + link.href + " " + check);
+				//console.log(response.fullName + " : " + response.isMatch);				
+				if(response.isMatch){
+					links[linkIndex].innerHTML = response.fullName;
+					links[linkIndex].href = response.newURL;					
+				} else {
+					links[linkIndex].href = response.newURL;
+					links[linkIndex].innerHTML = "X";	
+				}
+				console.log(linkIndex);
+				linkIndex++;
+				
+				//console.log("2: " + lastName + " " + links[linkIndex].innerHTML + " : " + links[linkIndex].href + " " + linkIndex);
+							
 				
 			});
 			//sleep(1000);
-			console.log("3: " + lastName + " " + link.innerHTML + " : " + link.href + " " + check);
+			console.log("3: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex);
 			link.target = "_blank";	
 	
 			//Add the link to score
@@ -213,6 +226,7 @@
 			
 			//Add the score to the instructors
 			instructors[i].appendChild(score);
+			
 		}
     }	
 	setTimeout(refresh, 100);

@@ -8,15 +8,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	// Gets ratingsLink
 	//alert(request.firstInitial);
 	//alert("enter event page");
-	var ratingsLink = findListingProf(request.oldURL, request.lastName, request.firstInitial, request.departmentName);
+	var ratingsLink = "ice cream";
+	ratingsLink = findListingProf(request.oldURL, request.lastName, request.firstInitial, request.departmentName);
+	//alert("hulloh");
 	//alert(ratingsLink);
 	
 	//sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", isMatch: false}); //for testing
 	
 	//If ratingsLink is empty
-	if (!ratingsLink) {
-		//alert("It's empty");
-		sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: "NaN", newURL: "", isMatch: false});
+	//alert(ratingsLink);
+	//alert(ratingsLink.toString());
+	alert("before if statement: ." + ratingsLink + ". " /*+ (ratingsLink.toString() == "undefined")*/);
+	if (ratingsLink == "ppoopypanyts") {	
+		alert(request.lastName + " has no results");
+		sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: "NaN", newURL: oldURL, isMatch: false});		
 	}
 	
 	var responseArr = findScores(ratingsLink);
@@ -40,12 +45,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function findListingProf(myURL, lastName, firstInitial, departmentName) {
-		
+		//alert("1 " + lastName);
 		var xmlhttp = new XMLHttpRequest();
+		var showRatingsLink;
 		xmlhttp.onreadystatechange=function()
 		{
 			if (xmlhttp.readyState==4 && xmlhttp.status==200)
 			{
+				//alert("3 " + lastName);
 				// make fake div, search through it 
 				var div = document.createElement('div');
 				var tempName; //Stores prof's name
@@ -53,7 +60,14 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				var numMatches = 0; //Checks if there's multiple profs with same first initial
 				div.innerHTML = xmlhttp.responseText;
 				
+				//alert("1. " + myURL + " " + lastName + " " + firstInitial + " " + departmentName);
 				var listingProfs = div.getElementsByClassName("listing PROFESSOR");
+				if(listingProfs.length == 0){
+					var retur = "ppoopypanyts";
+					//alert(retur);
+					//alert(lastName + " has empty results");
+					return retur;
+				}
 				/*if(firstInitial){
 					// Traverse through each name and check if first initial of first name matches to instructor's name
 					for (var i = 0; i < listingProfs.length; i++) {
@@ -72,19 +86,22 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				
 				
 				// get first listing PROFESSOR for now
-				var showRatingsLink = listingProfs[0].getElementsByTagName("a")[0].getAttribute("href");
+				
+				showRatingsLink = listingProfs[0].getElementsByTagName("a")[0].getAttribute("href");
+				
 				
 				showRatingsLink = "http://www.ratemyprofessors.com" + showRatingsLink;
 				
 				//alert(showRatingsLink);
-				
+				//alert("2. " + myURL + " " + lastName + " " + firstInitial + " " + departmentName);
 				return showRatingsLink; //return ratingsLink URL
 			}
 		}
-		xmlhttp.open("GET", myURL, false );
-		xmlhttp.send(); 
+		//alert("2 " + lastName);
+		xmlhttp.open("GET", myURL, false);
+		xmlhttp.send();
+		return showRatingsLink;
 		return xmlhttp.onreadystatechange();
-
 }
 
 	
