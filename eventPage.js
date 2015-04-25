@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	//alert("hulloh");
 	// Gets ratingsLink
 	//alert(request.firstInitial);
-	
+	//alert("enter event page");
 	var ratingsLink = findListingProf(request.oldURL, request.lastName, request.firstInitial, request.departmentName);
 	//alert(ratingsLink);
 	
@@ -40,6 +40,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function findListingProf(myURL, lastName, firstInitial, departmentName) {
+		
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange=function()
 		{
@@ -53,23 +54,25 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				div.innerHTML = xmlhttp.responseText;
 				
 				var listingProfs = div.getElementsByClassName("listing PROFESSOR");
-				
-				// Traverse through each name and check if first initial of first name matches to instructor's name
-				for (var i = 0; i < listingProfs.length; i++) {
-					var reComma = listingProfs[i].getElementsByClassName("main")[0].innerHTML.split(", ",2);
-					if (reComma[1].charAt(0).toLowerCase() == firstInitial) {
-						index = i;
-						numMatches++;
-					}
+				/*if(firstInitial){
+					// Traverse through each name and check if first initial of first name matches to instructor's name
+					for (var i = 0; i < listingProfs.length; i++) {
+						var reComma = listingProfs[i].getElementsByClassName("main")[0].innerHTML.split(", ",2);
+						if (reComma[1].charAt(0).toLowerCase() == firstInitial) {
+							index = i;
+							numMatches++;
+						}
+					}	
 				}
+				
 				//alert(numMatches);
 				if (numMatches != 1) {
 					return ""; //return null if there are more than 1 match or there are 0 matches
-				}
+				}*/
 				
 				
 				// get first listing PROFESSOR for now
-				var showRatingsLink = listingProfs[index].getElementsByTagName("a")[0].getAttribute("href");
+				var showRatingsLink = listingProfs[0].getElementsByTagName("a")[0].getAttribute("href");
 				
 				showRatingsLink = "http://www.ratemyprofessors.com" + showRatingsLink;
 				
@@ -87,6 +90,7 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 	
 
 function findScores(myURL) {
+	//alert(myURL);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function()
 	{
