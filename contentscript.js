@@ -182,6 +182,7 @@
 			chrome.runtime.sendMessage({oldURL: link.href, firstInitial: "a"}, function(response) {
 				//alert(showRatingsLink); //should print newURL in console
 				alert("after eventPage");
+				link.innerHTML = response.mainScore;
 			});
 			
 			link.target = "_blank";	

@@ -1,8 +1,4 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {	
-<<<<<<< HEAD
-	var newURL = httpGet(request.oldURL);	
-	sendResponse({newURL: newURL});	
-=======
 	//Parameters:
 	// request.oldURL
 	// request.firstInitial
@@ -40,7 +36,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	// isMatch: boolean; true if there's only 1 match, false if there's 0 or multiple matches
 	sendResponse({mainScore: responseArr[0], hScore: responseArr[1], cScore: responseArr[2], eScore: responseArr[3], avGrade: responseArr[4], fullName: responseArr[5], isMatch: true});
 	
->>>>>>> 6721efc2a9e4755766d67316371c05561cd0da00
 });
 
 function findListingProf(myURL, firstInitial) {
@@ -85,9 +80,9 @@ function findListingProf(myURL, firstInitial) {
 		xmlhttp.open("GET", myURL, false );
 		xmlhttp.send(); 
 		return xmlhttp.onreadystatechange();
-<<<<<<< HEAD
+
 }
-=======
+
 	}
 
 function findScores(myURL) {
@@ -138,4 +133,3 @@ function findScores(myURL) {
 		return xmlhttp.onreadystatechange();
 
 	}
->>>>>>> 6721efc2a9e4755766d67316371c05561cd0da00
