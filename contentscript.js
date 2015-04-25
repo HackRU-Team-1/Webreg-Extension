@@ -63,7 +63,7 @@
 	var currentDoc = document;
 	var departmentName;
 	if(onWR || onSOC){
-		if(onWR){
+		if(iframewindow != null && onWR){
 			currentDoc = iframewindow.document;
 		}		
 		var department = currentDoc.getElementById("subjectTitle");
@@ -82,14 +82,14 @@
 				}
 			}
 		}
-	} else {
+	} else if(onCSP){
 		if(document.getElementsByTagName("select")[2] != null){
 			var a = document.getElementsByTagName("select")[2];
 			departmentName = a.options[a.selectedIndex].innerHTML.substring(5,a.length);
 		}
 		
 	}
-	
+	var check = 0;
     console.log( "refreshed");	
 	//Loop through list that was chosen above
     for (i = 0; (x!=null) && i < x.length; i++) {
@@ -159,7 +159,7 @@
 				lastName = lastName.substring(1, lastName.length);
 			}
 			
-			console.log("LAST NAME: " + lastName + ". FIRST INITIAL: " + firstInitial);
+			//console.log("LAST NAME: " + lastName + ". FIRST INITIAL: " + firstInitial);
 			
 			//Remove excess punctuation
 			var stringInc;
@@ -182,60 +182,47 @@
 			link.style.textDecoration = "none";
 			link.marginBottom = "10px";			
 			
-			link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
+			/*link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";*/
+			link.href = null;
+			var link1 = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
 			
 			//alert("right before eventPage");
 			
-			console.log(lastName + " " + firstInitial + " " + departmentName);
-			
-			chrome.runtime.sendMessage({oldURL: link.href, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
+			//console.log(lastName + " " + firstInitial + " " + departmentName);
+			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + check);
+			chrome.runtime.sendMessage({oldURL: link1, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
 				//alert(showRatingsLink); //should print newURL in console
 				//alert("after eventPage");
 				//alert(response.mainScore);
 				link.innerHTML = response.mainScore;
 				link.href = response.newURL;
+				check++;
+				console.log("2: " + lastName + " " + link.innerHTML + " : " + link.href + " " + check);
+				
 			});
-			
+			//sleep(1000);
+			console.log("3: " + lastName + " " + link.innerHTML + " : " + link.href + " " + check);
 			link.target = "_blank";	
 	
 			//Add the link to score
 			score.appendChild(link);
 	
 			
-			console.log(lastName);
-			console.log(lastName.length);
+			//console.log(lastName);
+			//console.log(lastName.length);
 			
 			//Add the score to the instructors
 			x[i].appendChild(score);
 		}
     }	
-
-	
 	setTimeout(refresh, 1000);
 })();
 
-function httpGet(theUrl) {
-	var xmlHttp = null;		
-	xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", theUrl, false);
-	xmlHttp.send(null);
-	return xmlHttp.responseText; 
-}
-// MAKE THIS SMARTER
-// Right now, get first professor in list
-function getProfessorUrl(resultString) {
-	var index = resultString.contains("listing PROFESSOR"); //gets index of first occurrence of this class
-	if (index == -1) //if there are no professors in the list, return #
-		return "#";
-		
-	var start = index;
-	for (start; resultString.charAt(start) != "/"; start++) {} //
-	var end = start;
-	while(resultString.charAt(end) != "\""){
-		end++;
-	}
-	return resultString.substring(start,end);
-	
-	
-	return newURL; // Returns URL of best 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
