@@ -5,6 +5,8 @@
 		var iframewindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
 		x = iframewindow.document.getElementsByClassName("instructors");
 	}
+	
+	
 	//console.log(x.length);
 	var csp = document.getElementsByTagName("td");
 	
@@ -30,9 +32,11 @@
 	}
 	
 	//Webreg requires access to an iframe
+	var aboveiframe;
+	
 	if(onWR){
-		var iframe = document.getElementById("iframe2");
-		
+		aboveiframe = document;
+		var iframe = document.getElementById("iframe2");		
 		if (iframe != null) {
 			var iframewindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
 			x = iframewindow.document.getElementsByClassName("instructors");
@@ -54,8 +58,39 @@
 		}
 	}
 	
-    var i;	
-    console.log( "refreshed" );
+    var i;
+	//Extracts department name from SOC.
+	var currentDoc = document;
+	var departmentName;
+	if(onWR || onSOC){
+		if(onWR){
+			currentDoc = iframewindow.document;
+		}		
+		var department = currentDoc.getElementById("subjectTitle");
+		if(department != null){
+			//Gets the HTML and looks through it for the department name. The name starts at the 45th character
+			department = department.innerHTML;			
+			var semic = 45;
+			var paren;
+			for(paren = 0; paren < department.length; paren++){
+				//Go until the first paren, which occurs so we know the department name is over. Then take a substring.
+				if(department.charAt(paren) == '('){					
+					departmentName = department.substring(semic,paren - 1);
+					//Replace ampersand code with actual ampersands					
+					departmentName = departmentName.split("&amp;").join("&");
+					break;
+				}
+			}
+		}
+	} else {
+		if(document.getElementsByTagName("select")[2] != null){
+			var a = document.getElementsByTagName("select")[2];
+			departmentName = a.options[a.selectedIndex].innerHTML.substring(5,a.length);
+		}
+		
+	}
+	
+    console.log( "refreshed: [" + departmentName + "]");	
 	//Loop through list that was chosen above
     for (i = 0; (x!=null) && i < x.length; i++) {
 	    if (x[i].hasChildNodes() && x[i].childNodes.length < 2) {
