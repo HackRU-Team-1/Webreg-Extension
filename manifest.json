@@ -8,7 +8,7 @@
   "version": "1.0.0.5",
 
   "permissions": [
-        "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*"
+    "tabs", "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*", "*://www.ratemyprofessors.com/*"
   ],
   "content_scripts": [
     {
