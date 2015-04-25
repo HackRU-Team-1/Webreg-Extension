@@ -90,7 +90,7 @@
 		
 	}
 	
-    console.log( "refreshed: [" + departmentName + "]");	
+    console.log( "refreshed");	
 	//Loop through list that was chosen above
     for (i = 0; (x!=null) && i < x.length; i++) {
 	    if (x[i].hasChildNodes() && x[i].childNodes.length < 2) {
@@ -129,7 +129,7 @@
 			
 			
 			//TBD is used as a placeholder some times
-			if (lastName == "TBD"){
+			if (lastName == "tbd"){
 				continue;
 			}
 			
@@ -138,21 +138,28 @@
 			//2. If it is formatted as LASTNAME
 			//3. If it is formatted as FIRSTINITIAL. LASTNAME
 			//Else, remove all punctuation
-			
-			var reComma = lastName.split(",",1);
+			var firstInitial = "";
+			var reComma = lastName.split(",");
 			
 			//reComma is now an array, holding the two halves of the lastName, split around a comma. We use [0] in the next line to access the first half
+			//Case 3
 			if (reComma[0].indexOf(".") != -1) {
 				var rePeriod = lastName.split(".",2); //split on period and space
+				firstInitial = rePeriod[0];
 				lastName = rePeriod[1]; //This will hold the last name after period and space
 			}
+			//Case 1,2
 			else {
+				if(reComma.length > 1){
+					firstInitial = reComma[1].split('.')[0].trim();
+				}
 				lastName = reComma[0]; //This will hold the last name before comma (if exists)
 			}			
 			if (lastName.charAt(0) == " ") {  //To prevent inconsistencies from Webreg
 				lastName = lastName.substring(1, lastName.length);
 			}
 			
+			console.log("LAST NAME: " + lastName + ". FIRST INITIAL: " + firstInitial);
 			
 			//Remove excess punctuation
 			var stringInc;
@@ -177,12 +184,16 @@
 			
 			link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
 			
-			alert("right before eventPage");
+			//alert("right before eventPage");
 			
-			chrome.runtime.sendMessage({oldURL: link.href, firstInitial: "a"}, function(response) {
+			console.log(lastName + " " + firstInitial + " " + departmentName);
+			
+			chrome.runtime.sendMessage({oldURL: link.href, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
 				//alert(showRatingsLink); //should print newURL in console
-				alert("after eventPage");
+				//alert("after eventPage");
+				//alert(response.mainScore);
 				link.innerHTML = response.mainScore;
+				link.href = response.newURL;
 			});
 			
 			link.target = "_blank";	

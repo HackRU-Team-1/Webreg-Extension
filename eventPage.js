@@ -1,4 +1,5 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {	
+
 	//Parameters:
 	// request.oldURL
 	// request.firstInitial
@@ -7,25 +8,25 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	// Gets ratingsLink
 	//alert(request.firstInitial);
 	
-	var ratingsLink = findListingProf(request.oldURL, request.firstInitial);
-	alert(ratingsLink);
+	var ratingsLink = findListingProf(request.oldURL, request.lastName, request.firstInitial, request.departmentName);
+	//alert(ratingsLink);
 	
 	//sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", isMatch: false}); //for testing
 	
 	//If ratingsLink is empty
 	if (!ratingsLink) {
-		alert("It's empty");
-		sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: "NaN", isMatch: false});
+		//alert("It's empty");
+		sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: "NaN", newURL: "", isMatch: false});
 	}
 	
 	var responseArr = findScores(ratingsLink);
-	alert("made it!");
+	/*alert("made it!");
 	alert(responseArr[0]);
 	alert(responseArr[1]);
 	alert(responseArr[2]);
 	alert(responseArr[3]);
 	alert(responseArr[4]);
-	alert(responseArr[5]);
+	alert(responseArr[5]);*/
 	//sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", isMatch: false}); //for testing
 	//Responses:
 	// mainScore
@@ -34,11 +35,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	// eScore
 	// avGrade
 	// isMatch: boolean; true if there's only 1 match, false if there's 0 or multiple matches
-	sendResponse({mainScore: responseArr[0], hScore: responseArr[1], cScore: responseArr[2], eScore: responseArr[3], avGrade: responseArr[4], fullName: responseArr[5], isMatch: true});
+	sendResponse({mainScore: responseArr[0], hScore: responseArr[1], cScore: responseArr[2], eScore: responseArr[3], avGrade: responseArr[4], fullName: responseArr[5], newURL: ratingsLink, isMatch: true});
 	
 });
 
-function findListingProf(myURL, firstInitial) {
+function findListingProf(myURL, lastName, firstInitial, departmentName) {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange=function()
 		{
@@ -83,7 +84,7 @@ function findListingProf(myURL, firstInitial) {
 
 }
 
-	}
+	
 
 function findScores(myURL) {
 	var xmlhttp = new XMLHttpRequest();
@@ -133,3 +134,4 @@ function findScores(myURL) {
 		return xmlhttp.onreadystatechange();
 
 	}
+}
