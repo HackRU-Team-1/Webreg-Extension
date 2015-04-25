@@ -4,6 +4,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	//alert(newURL); //THIS ALERT WORKS
 	// newURL isn't a string....?
 	//var index = newURL.contains("listing PROFESSOR");
+	/var index = newURL.contains("listing PROFESSOR");
 	//alert(index); 
 	//document.write(httpGet(request.oldURL));
 	//console.log("We're outside function");
