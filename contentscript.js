@@ -132,7 +132,7 @@
 			
 			
 			//TBD is used as a placeholder some times
-			if (lastName == "tbd"){
+			if (lastName == "tbd" || lastName == "."){
 				continue;
 			}
 			
@@ -191,8 +191,6 @@
 			link.style.textDecoration = "none";
 			link.marginBottom = "10px";
 			
-			/*link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";*/
-			
 			var link1 = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
 			link.href = link1;
 			links.push(link);
@@ -200,7 +198,6 @@
 			
 			//console.log(lastName + " " + firstInitial + " " + departmentName);
 			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex + " " + firstInitial);
-			//linkIndex++;
 			chrome.runtime.sendMessage({oldURL: link1, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
 				//alert(showRatingsLink); //should print newURL in console
 				//alert("after eventPage");
