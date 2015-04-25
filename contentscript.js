@@ -118,6 +118,7 @@
 				lastName = lastName.substring(1, lastName.length);
 			}
 			
+			
 			//Remove excess punctuation
 			var stringInc;
 			for(stringInc = 0; stringInc < lastName.length; stringInc++){
@@ -140,9 +141,12 @@
 			link.marginBottom = "10px";			
 			
 			link.href = "http://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&schoolName=rutgers&queryoption=HEADER&query=" + lastName + "&facetSearch=true";
-							
-			chrome.runtime.sendMessage({oldURL: link.href}, function(response) {
+			
+			alert("right before eventPage");
+			
+			chrome.runtime.sendMessage({oldURL: link.href, firstInitial: "a"}, function(response) {
 				//alert(showRatingsLink); //should print newURL in console
+				alert("after eventPage");
 			});
 			
 			link.target = "_blank";	
