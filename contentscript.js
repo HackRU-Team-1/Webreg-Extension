@@ -103,7 +103,8 @@
 			//Determine formatting based on site
 			if(onWR || onSOC){
 				score.id = "score";
-				score.style.width = "50px";
+				score.style.width = "24px";
+				//score.style.width = "50px";
 				score.style.height = "24px";
 				score.style.background = "#CF1D32";
 				score.style.paddingTop = "10px";
@@ -140,8 +141,14 @@
 			//2. If it is formatted as LASTNAME
 			//3. If it is formatted as FIRSTINITIAL. LASTNAME
 			//Else, remove all punctuation
-			var firstInitial = "undefined";
+			var firstInitial = "not found";
 			var reComma = lastName.split(",");
+			
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			// !!!!!!!!!!!!!!!!!!!!THIS FIRSTINITIAL FINDER DOES NOT WORK. REWORK THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			
 			//reComma is now an array, holding the two halves of the lastName, split around a comma. We use [0] in the next line to access the first half
 			//Case 3
@@ -192,15 +199,17 @@
 			//alert("right before eventPage");
 			
 			//console.log(lastName + " " + firstInitial + " " + departmentName);
-			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex);
+			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex + " " + firstInitial);
 			//linkIndex++;
 			chrome.runtime.sendMessage({oldURL: link1, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
 				//alert(showRatingsLink); //should print newURL in console
 				//alert("after eventPage");
 				//alert(response.mainScore);
-				//console.log(response.fullName + " : " + response.isMatch);				
+				console.log(response.fullName + " : " + response.isMatch);
+				//linkIndex--;				
 				if(response.isMatch){
-					links[linkIndex].innerHTML = response.fullName;
+					links[linkIndex].innerHTML = response.mainScore;
+					//links[linkIndex].innerHTML = response.fullName;
 					links[linkIndex].href = response.newURL;					
 				} else {
 					links[linkIndex].href = response.newURL;
@@ -208,7 +217,6 @@
 				}
 				console.log(linkIndex);
 				linkIndex++;
-				
 				//console.log("2: " + lastName + " " + links[linkIndex].innerHTML + " : " + links[linkIndex].href + " " + linkIndex);
 							
 				
@@ -229,7 +237,7 @@
 			
 		}
     }	
-	setTimeout(refresh, 100);
+	setTimeout(refresh, 1);
 })();
 
 function sleep(milliseconds) {
