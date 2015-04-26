@@ -198,18 +198,20 @@
 				//alert("after eventPage");
 				//alert(response.mainScore);
 				console.log(response.fullName + " : " + response.isMatch);
-				//linkIndex--;				
+				// I don't think we even need response.isMatch anymore for this part.
+				// mainScore stores X.X or ?.? in addition to regular score when needed.
 				if(response.isMatch){
 					links[linkIndex].innerHTML = response.mainScore;
 					//links[linkIndex].innerHTML = response.fullName;
 					links[linkIndex].href = response.newURL;					
 				} else {
 					links[linkIndex].href = response.newURL;
-					links[linkIndex].innerHTML = "X.X";	
+					links[linkIndex].innerHTML = response.mainScore; // Will store X.X or ?.? accordingly
 				}
 				//console.log("precolor: " + links[linkIndex].innerText + " " + links[linkIndex].parentNode.innerHTML);
 				
-				if(links[linkIndex].innerText!= "X" && links[linkIndex].innerText != "?"){
+				// We could use isMatch for this if statement to simplify it. Since we don't need it for the above any more
+				if(links[linkIndex].innerText!= "X.X" && links[linkIndex].innerText != "?.?"){
 					if(parseFloat(links[linkIndex].innerText) >= 3.5){
 						//console.log("1=");
 						links[linkIndex].parentNode.style.background = "#66CC00";
@@ -221,7 +223,7 @@
 						links[linkIndex].parentNode.style.background = "#CF1D32";
 					}
 				} else {
-					if(links[linkIndex].innerText!= "X"){
+					if(links[linkIndex].innerText!= "X.X"){
 						links[linkIndex].parentNode.style.background = "#892A7A";
 					} else {
 						links[linkIndex].parentNode.style.background = "#2A3A89";

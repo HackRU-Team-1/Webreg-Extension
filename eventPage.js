@@ -3,32 +3,24 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	//Parameters:
 	// request.oldURL
 	// request.firstInitial
-	
-	//alert("hulloh");
 	// Gets ratingsLink
-	//alert(request.firstInitial);
-	//alert("enter event page");
 	var ratingsLink = "not found";
 	ratingsLink = findListingProf(request.oldURL, request.lastName, request.firstInitial, request.departmentName);
-	//alert("hulloh");
-	//alert(ratingsLink);
 	
-	//sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", isMatch: false}); //for testing
-	
-	//If ratingsLink is empty
-	//alert(ratingsLink);
-	//alert(ratingsLink.toString());
-	//alert("before if statement: ." + ratingsLink + ". " /*+ (ratingsLink.toString() == "undefined")*/);
-	if (ratingsLink == "not found") {	
-		//alert(request.lastName + " has no results");
-		sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: request.lastName, newURL: request.oldURL, isMatch: false});		
+	//If there are no Matches, put X.X
+	if (ratingsLink == "not found") {
+		sendResponse({mainScore: "X.X", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: request.lastName, newURL: request.oldURL, isMatch: false});		
+	}
+	// If there are more than 1 match, put ?.?
+	else if (ratingsLink == "multiple matches") {
+		sendResponse({mainScore: "?.?", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: request.lastName, newURL: request.oldURL, isMatch: false});
 	}
 	
 	var responseArr = findScores(ratingsLink);
 	
 	//If rateMyProf profile exists, but has not been created
 	if (responseArr[0] == "not found") {
-		sendResponse({mainScore: "0", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: request.lastName, newURL: request.oldURL, isMatch: false});
+		sendResponse({mainScore: "X.X", hScore: "0", cScore: "0", eScore: "0", avGrade: "F", fullName: request.lastName, newURL: request.oldURL, isMatch: false});
 	}
 	/*alert("made it!");
 	alert(responseArr[0]);
@@ -86,7 +78,7 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				
 				//alert(numMatches);
 				if (numMatches > 1) {
-					showRatingsLink = "not found";
+					showRatingsLink = "multiple matches";
 					return; //return not found if there are more than 1 match or there are 0 matches
 				}
 				
