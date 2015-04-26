@@ -25,20 +25,28 @@
 	padding-bottom: 20px;
 }
 .fpo-info-bubble .text{
-  font-family: "Alternate-Gothic";
-  font-size: 30px;
+  font-family: "Arial";
+  font-size: 15px;
   padding-top: 3px;
 }
 
 .score{
-  float:right;
-  padding-left: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+  background-color: red;
+  width: 20px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  font-family: "Times-New-Roman";
 }
+
 .fpo-info-bubble {
   
   position: relative;
-  width: 250px;
-  height: 36px;
+  width: 176px;
+  height: 106px;
   padding: 0px;
   background: #FFFFFF;
   border: #C20F2F solid 3px;
@@ -51,7 +59,7 @@
   content: "";
   position: absolute;
   bottom: -15px;
-  left: 110px;
+  left: 73px;
   border-style: solid;
   border-width: 15px 15px 0;
   border-color: #FFFFFF transparent;
@@ -63,8 +71,8 @@
 .fpo-info-bubble:before{
   content: "";
   position: absolute;
-  top: 39px;
-  left: 108px;
+  top: 108px;
+  left: 71px;
   border-style: solid;
   border-width: 17px 17px 0;
   border-color: #C20F2F transparent;
@@ -74,33 +82,29 @@
 }
 
 .fpo-info-bubble #helpfulness {
-  float:left;
   padding-left: 10px;
-  border-style: solid;
-  border-color: lightgrey;
-  border-width: 0 1px 0 0;
   padding-right: 10px;
+  padding-top: 3px;
 }
 
 .fpo-info-bubble #clarity {
-  float:left;
   padding-left: 10px;
-  border-style: solid;
-  border-color: lightgrey;
-  border-width: 0 1px 0 0;
   padding-right: 10px;
+  padding-top: 3px;
+}
+
+.fpo-info-bubble #average-grade {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
 }
 
 .fpo-info-bubble #easiness {
-  float:left;
   padding-left: 10px;
-  border-style: solid;
-  border-color: lightgrey;
-  border-width: 0 1px 0 0;
   padding-right: 10px;
+  padding-top: 3px;
 }
 
-.fpo-info-bubble #link{
-  float:left;
-  margin-left: 8px;
+.fpo-info-bubble #professor-name {
+  font-size: 1vw;
 }
