@@ -66,10 +66,10 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				
 				// MAKE THIS CHECKER BETTER
 				if(firstInitial != "not found"){
-					// Traverse through each name and check if first initial of first name matches to instructor's name
+					// Traverse through each name and check if first initial of first name and last name matches to instructor's name
 					for (var i = 0; i < listingProfs.length; i++) {
 						var reComma = listingProfs[i].getElementsByClassName("main")[0].innerHTML.split(", ",2);
-						if (reComma[1].charAt(0).toLowerCase() == firstInitial) {
+						if (reComma[1].charAt(0).toLowerCase() == firstInitial && reComma[0].toLowerCase() == lastName) {
 							index = i;
 							numMatches++;
 						}

@@ -223,7 +223,7 @@
 						links[linkIndex].parentNode.style.background = "#CF1D32";
 					}
 				} else {
-					if(links[linkIndex].innerText!= "X.X"){
+					if(links[linkIndex].innerText != "X.X"){
 						links[linkIndex].parentNode.style.background = "#892A7A";
 					} else {
 						links[linkIndex].parentNode.style.background = "#2A3A89";
