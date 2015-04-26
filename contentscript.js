@@ -205,8 +205,30 @@
 					links[linkIndex].href = response.newURL;					
 				} else {
 					links[linkIndex].href = response.newURL;
-					links[linkIndex].innerHTML = "?.?";	
+					links[linkIndex].innerHTML = "X.X";	
 				}
+				//console.log("precolor: " + links[linkIndex].innerText + " " + links[linkIndex].parentNode.innerHTML);
+				
+				if(links[linkIndex].innerText!= "X" && links[linkIndex].innerText != "?"){
+					if(parseFloat(links[linkIndex].innerText) >= 3.5){
+						//console.log("1=");
+						links[linkIndex].parentNode.style.background = "#66CC00";
+					} else if(parseFloat(links[linkIndex].innerText) >= 2.5){
+						//console.log("2=");
+						links[linkIndex].parentNode.style.background = "#E0C92A";
+					} else {
+						//console.log("3=");
+						links[linkIndex].parentNode.style.background = "#CF1D32";
+					}
+				} else {
+					if(links[linkIndex].innerText!= "X"){
+						links[linkIndex].parentNode.style.background = "#892A7A";
+					} else {
+						links[linkIndex].parentNode.style.background = "#2A3A89";
+					}
+				}
+				
+				
 				console.log(linkIndex);
 				linkIndex++;
 				//console.log("2: " + lastName + " " + links[linkIndex].innerHTML + " : " + links[linkIndex].href + " " + linkIndex);
