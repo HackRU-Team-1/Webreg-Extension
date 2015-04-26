@@ -14,6 +14,8 @@
 	padding-bottom: 28px;
 	font-size: 20px;
 	font-weight: normal;
+  position: relative;
+  z-index: auto;
 }
 
 .popup input {
@@ -44,7 +46,7 @@
 
 .fpo-info-bubble {
   
-  position: relative;
+  position: fixed;
   width: 176px;
   height: 106px;
   padding: 0px;
@@ -53,6 +55,7 @@
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  z-index: 999;
   
 }
 .fpo-info-bubble:after{
@@ -106,5 +109,4 @@
 }
 
 .fpo-info-bubble #professor-name {
-  font-size: 1vw;
 }

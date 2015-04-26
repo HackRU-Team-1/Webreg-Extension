@@ -99,7 +99,6 @@
 			
 			//This element will hold the instructors score
 			var score = document.createElement("span");
-			
 			//Determine formatting based on site
 			if(onWR || onSOC){
 				score.id = "score";
@@ -121,7 +120,9 @@
 				score.style.paddingLeft= "10px";
 				score.style.paddingRight = "10px";
 				score.style.marginLeft = "10px";
-			}			
+			}
+      
+      
 			
 			score.style.fontSize = "15px";
 			
@@ -250,7 +251,26 @@
 			instructors[i].appendChild(score);
 			
 		}
-    }	
+    }
+    
+    $('span#score').hover(function(){
+      if($(this).hasClass("hovered")){
+      }else{
+        var scorePos = getPosition(this);
+        var scrollPos = $(iframe).scrollTop();
+        var xOffset = -115;
+        var yOffset = -125;
+        var yPos = scorePos.y-scrollPos+yOffset;
+        var xPos = scorePos+xOffset;
+        $(this).prepend("<div class=\"fpo-info-bubble\" style:\"left:" + xPos + "px;top:" + yPos +"px;\"> <div class=\"text\"> <div id=\"professor-name\"> <center> <a href=\"\" style=\"color:#C20F2F;\">PROFESSOR NAME</a> </center> </div> <div id=\"helpfulness\"> Helpfulness <div id=\"help-score\" class=\"score\"><center>0.0</center></div> </div> <div id=\"clarity\"> Clarity <div id=\"clarity-score\" class=\"score\"><center>0.0</center></div> </div> <div id=\"easiness\"> Easiness <div id=\"easy-score\" class=\"score\"><center>0.0</center></div> </div> <div id=\"average-grade\"> Average Grade <div id=\"average-grade-score\" class=\"score\"><center>A</center></div> </div> </div> </div>");
+        $(this).toggleClass("hovered");
+      }
+    }, function(){
+        $('.fpo-info-bubble').remove();
+        $(this).toggleClass("hovered");
+    });
+    
+    
 	setTimeout(refresh, 10);
 })();
 
@@ -261,4 +281,16 @@ function sleep(milliseconds) {
       break;
     }
   }
+}
+
+function getPosition(element) {
+  var xPosition = 0;
+  var yPosition = 0;
+
+  while(element) {
+      xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+      yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+      element = element.offsetParent;
+  }
+  return { x: xPosition, y: yPosition };
 }

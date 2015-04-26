@@ -15,7 +15,7 @@
 	  "matches": [ "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*"],
       
       "css": ["stylesheet.css"],
-      "js": [/*"jquery-2.1.3.min.js",*/ "contentscript.js"],
+      "js": ["jquery-2.1.3.min.js", "hover.js", "contentscript.js"],
 	  "run_at": "document_end"
     }
   ],
