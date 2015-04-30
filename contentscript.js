@@ -319,4 +319,7 @@ function getPosition(element) {
       element = element.offsetParent;
   }
   return { x: xPosition, y: yPosition };
+
 }
+}
+
