@@ -195,7 +195,8 @@
 			//console.log(lastName + " " + firstInitial + " " + departmentName);
 			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex + " " + firstInitial);
 			chrome.runtime.sendMessage({oldURL: link1, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
-				//alert(showRatingsLink); //should print newURL in console
+				
+        //alert(showRatingsLink); //should print newURL in console
 				//alert("after eventPage");
 				//alert(response.mainScore);
 				console.log(response.fullName + " : " + response.isMatch);
@@ -204,7 +205,45 @@
 				if(response.isMatch){
 					links[linkIndex].innerHTML = response.mainScore;
 					//links[linkIndex].innerHTML = response.fullName;
-					links[linkIndex].href = response.newURL;					
+					links[linkIndex].href = response.newURL;
+          //hover window
+          $('span#score').hover(function(){
+            if($(this).hasClass("hovered")){
+            }else{
+              var scorePos = getPosition(this);
+              var xOffset = -115;
+              var yOffset = -125;
+              var yPos = scorePos.y+yOffset;
+              var xPos = scorePos+xOffset;
+              //score color code
+              if(parseFloat(response.hScore) >= 3.5){
+                var hColor = "#66CC00";
+              }else if(parseFloat(response.hScore) >= 2.5){
+                var hColor = "#E0C92A";
+              }else{
+                var hColor = "#CF1D32";
+              }
+              if(response.eScore >= 3.5){
+                var eColor = "#66CC00";
+              }else if(response.eScore >= 2.5){
+                var eColor = "#E0C92A";
+              }else{
+                var eColor = "#CF1D32";
+              }
+              if(response.cScore >= 3.5){
+                var cColor = "#66CC00";
+              }else if(response.cScore >= 2.5){
+                var cColor = "#E0C92A";
+              }else{
+                var cColor = "#CF1D32";
+              }
+              $(this).prepend("<div class=\"fpo-info-bubble\" style:\"left:" + xPos + "px;top:" + yPos +"px;\"> <div class=\"text\"> <div id=\"professor-name\"> <center> <a href=\"\" style=\"color:#C20F2F;\">" + response.fullName + "</a> </center> </div> <div id=\"helpfulness\"> Helpfulness <div id=\"help-score\" class=\"score\" style:\"background-color:" + hColor + ";\"><center>"+response.hScore+"</center></div> </div> <div id=\"clarity\"> Clarity <div id=\"clarity-score\" class=\"score\" style:\"background-color:"+cColor+";\"><center>"+response.cScore+"</center></div> </div> <div id=\"easiness\"> Easiness <div id=\"easy-score\" class=\"score\" style:\"background-color:"+eColor+";\"><center>"+response.eScore+"</center></div> </div> <div id=\"average-grade\"> Average Grade <div id=\"average-grade-score\" class=\"score\"><center>"+response.avGrade+"</center></div> </div> </div> </div>");
+              $(this).toggleClass("hovered");
+            }
+          }, function(){
+              $('.fpo-info-bubble').remove();
+              $(this).toggleClass("hovered");
+          });
 				} else {
 					links[linkIndex].href = response.newURL;
 					links[linkIndex].innerHTML = response.mainScore; // Will store X.X or ?.? accordingly
@@ -255,25 +294,10 @@
 		}
     }
     
-    $('span#score').hover(function(){
-      if($(this).hasClass("hovered")){
-      }else{
-        var scorePos = getPosition(this);
-        var scrollPos = $(iframe).scrollTop();
-        var xOffset = -115;
-        var yOffset = -125;
-        var yPos = scorePos.y-scrollPos+yOffset;
-        var xPos = scorePos+xOffset;
-        $(this).prepend("<div class=\"fpo-info-bubble\" style:\"left:" + xPos + "px;top:" + yPos +"px;\"> <div class=\"text\"> <div id=\"professor-name\"> <center> <a href=\"\" style=\"color:#C20F2F;\">PROFESSOR NAME</a> </center> </div> <div id=\"helpfulness\"> Helpfulness <div id=\"help-score\" class=\"score\"><center>0.0</center></div> </div> <div id=\"clarity\"> Clarity <div id=\"clarity-score\" class=\"score\"><center>0.0</center></div> </div> <div id=\"easiness\"> Easiness <div id=\"easy-score\" class=\"score\"><center>0.0</center></div> </div> <div id=\"average-grade\"> Average Grade <div id=\"average-grade-score\" class=\"score\"><center>A</center></div> </div> </div> </div>");
-        $(this).toggleClass("hovered");
-      }
-    }, function(){
-        $('.fpo-info-bubble').remove();
-        $(this).toggleClass("hovered");
-    });
     
     
-	setTimeout(refresh, 10);
+    
+	setTimeout(refresh, 100);
 })();
 
 function sleep(milliseconds) {
