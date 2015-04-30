@@ -211,7 +211,7 @@
             if($(this).hasClass("hovered")){
             }else{
               var scorePos = getPosition(this);
-              var xOffset = -115;
+              var xOffset = -125;
               var yOffset = -125;
               var yPos = scorePos.y+yOffset;
               var xPos = scorePos+xOffset;
@@ -237,7 +237,7 @@
               }else{
                 var cColor = "#CF1D32";
               }
-              $(this).prepend("<div class=\"fpo-info-bubble\" style:\"left:" + xPos + "px;top:" + yPos +"px;\"> <div class=\"text\"> <div id=\"professor-name\"> <center> <a href=\"\" style=\"color:#C20F2F;\">" + response.fullName + "</a> </center> </div> <div id=\"helpfulness\"> Helpfulness <div id=\"help-score\" class=\"score\" style:\"background-color:" + hColor + ";\"><center>"+response.hScore+"</center></div> </div> <div id=\"clarity\"> Clarity <div id=\"clarity-score\" class=\"score\" style:\"background-color:"+cColor+";\"><center>"+response.cScore+"</center></div> </div> <div id=\"easiness\"> Easiness <div id=\"easy-score\" class=\"score\" style:\"background-color:"+eColor+";\"><center>"+response.eScore+"</center></div> </div> <div id=\"average-grade\"> Average Grade <div id=\"average-grade-score\" class=\"score\"><center>"+response.avGrade+"</center></div> </div> </div> </div>");
+              $(this).prepend("<div class=\"fpo-info-bubble\" style=\"left:" + xPos + "px;top:" + yPos +"px;\"> <div class=\"text\"> <div id=\"professor-name\"> <center> <a href=\"\" style=\"color:#C20F2F;\">" + response.fullName + "</a> </center> </div> <div id=\"helpfulness\"> Helpfulness <div id=\"help-score\" class=\"score\" style=\"background-color:" + hColor + ";\"><center>"+ response.hScore+"</center></div> </div> <div id=\"clarity\"> Clarity <div id=\"clarity-score\" class=\"score\" style=\"background-color:"+cColor+";\"><center>"+response.cScore+"</center></div> </div> <div id=\"easiness\"> Easiness <div id=\"easy-score\" class=\"score\" style=\"background-color:"+eColor+";\"><center>"+response.eScore+"</center></div> </div> <div id=\"average-grade\"> Average Grade <div id=\"average-grade-score\" class=\"score\"><center>"+response.avGrade+"</center></div> </div> </div> </div>");
               $(this).toggleClass("hovered");
             }
           }, function(){
