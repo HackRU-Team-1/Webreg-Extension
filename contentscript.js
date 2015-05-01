@@ -181,7 +181,7 @@
 			
 			//Create the link to the ratemyprofessors search
 			var link = document.createElement("a");
-			link.innerHTML = "Search";
+			link.innerHTML = ".....";
 			link.style.color = "#FFFFFF";
 			link.style.horizontalAlign = "middle";
 			link.style.verticalAlign = "middle";
