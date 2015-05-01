@@ -53,7 +53,8 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				// make fake div, search through it 
 				var div = document.createElement('div');
 				var tempName; //Stores prof's name
-				var index = 0; //Saves the index in which the match takes place
+				var index = new Array();
+				//var index = 0; //Saves the index in which the match takes place
 				var numMatches = 0; //Checks if there's multiple profs with same first initial
 				div.innerHTML = xmlhttp.responseText;
 				
@@ -70,7 +71,7 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 					for (var i = 0; i < listingProfs.length; i++) {
 						var reComma = listingProfs[i].getElementsByClassName("main")[0].innerHTML.split(", ",2);
 						if (reComma[1].charAt(0).toLowerCase() == firstInitial && reComma[0].toLowerCase() == lastName) {
-							index = i;
+							index.push(i);
 							numMatches++;
 						}
 					}	
@@ -78,14 +79,24 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				
 				//alert(numMatches);
 				if (numMatches > 1) {
-					showRatingsLink = "multiple matches";
-					return; //return not found if there are more than 1 match or there are 0 matches
+					// Last second check between departmentNames if there are multiple matches
+					for (var i = 0; i < index.length; i++) {
+						if (listingProfs[index[i]].getElementsByClassName("sub")[0].innerHTML.indexOf(departmentName) != -1) {
+							index[0] = index[i];
+							numMatches = 1;
+							break;
+						}
+					}
+					if (numMatches > 1) {
+						showRatingsLink = "multiple matches";
+						return; //return not found if there are more than 1 match or there are 0 matches
+					}
 				}
 				
 				
 				// get first listing PROFESSOR for now
 				
-				showRatingsLink = listingProfs[index].getElementsByTagName("a")[0].getAttribute("href");
+				showRatingsLink = listingProfs[index[0]].getElementsByTagName("a")[0].getAttribute("href");
 				
 				
 				showRatingsLink = "http://www.ratemyprofessors.com" + showRatingsLink;
