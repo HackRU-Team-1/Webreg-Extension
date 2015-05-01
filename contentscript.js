@@ -216,7 +216,7 @@
 						}else{
 						  var scorePos = getPosition(this);
 						  var xOffset = -67;
-						  var yOffset = -110;
+						  var yOffset = -113;
 						  var yPos = scorePos.y+yOffset;
 						  var xPos = scorePos.x+xOffset;
 						  //var yPos = scorePos.y;
@@ -248,10 +248,12 @@
 							  gColor = "#66CC00";
 						  } else if(response.avGrade.charAt(0) == 'B'){
 							  gColor = "#66CC00";
-						  } else if (response.avGrade.charAt(0) == 'N'){
-							  gColor = "#A15595";
-						  } else {
+						  } else if (response.avGrade.charAt(0) == 'C'){
 							  gColor = "#E0C92A";
+						  }else if (response.avGrade.charAt(0) == 'D'){
+							  gColor = "#CF1D32";
+						  } else {
+							  gColor = "#A15595";
 						  }
 						  $(this).prepend("<div class=\"fpo-info-bubble\" style=\"left:" + xPos + "px;top:" + yPos +"px;\"> <div class=\"text\"> <div id=\"professor-name\"> <center> <a href=\"\" style=\"color:#C20F2F;\">" + response.fullName + "</a> </center> </div> <div id=\"helpfulness\"> Helpfulness <div id=\"help-score\" class=\"score\" style=\"background-color:" + hColor + ";\"><center>"+ response.hScore+"</center></div> </div> <div id=\"clarity\"> Clarity <div id=\"clarity-score\" class=\"score\" style=\"background-color:"+cColor+";\"><center>"+response.cScore+"</center></div> </div> <div id=\"easiness\"> Easiness <div id=\"easy-score\" class=\"score\" style=\"background-color:"+eColor+";\"><center>"+response.eScore+"</center></div> </div> <div id=\"average-grade\"> Average Grade <div id=\"average-grade-score\" class=\"score\" style=\"background-color:"+gColor+";\"><center>"+response.avGrade+"</center></div> </div> </div> </div>");
 						  $(this).toggleClass("hovered");
