@@ -66,22 +66,28 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				}
 				
 				// MAKE THIS CHECKER BETTER
-				if (firstInitial != "not found") {
-					// Traverse through each name and check if first initial of first name and last name matches to instructor's name
-					for (var i = 0; i < listingProfs.length; i++) {
-						var reComma = listingProfs[i].getElementsByClassName("main")[0].innerHTML.split(", ",2);
-						//if (firstInitial.length == 1) {
-						//	if (reComma[1].charAt(0).toLowerCase() == firstInitial && reComma[0].toLowerCase() == lastName) {
-						//		index.push(i);
-						//		numMatches++;
-						//	}
-						//} 
+				// Traverse through each name and check if first initial of first name and last name matches to instructor's name
+				for (var i = 0; i < listingProfs.length; i++) {
+					var reComma = listingProfs[i].getElementsByClassName("main")[0].innerHTML.split(", ",2);
+					//if (firstInitial.length == 1) {
+					//	if (reComma[1].charAt(0).toLowerCase() == firstInitial && reComma[0].toLowerCase() == lastName) {
+					//		index.push(i);
+					//		numMatches++;
+					//	}
+					//} 
+					if (firstInitial != "not found") {
 						if (reComma[1].toLowerCase().indexOf(firstInitial) == 0 && reComma[0].toLowerCase() == lastName) {
 							index.push(i);
 							numMatches++;
 						}
 					}
-				}				
+					else {
+						if (reComma[0].toLowerCase() == lastName) {
+							index.push(i);
+							numMatches++;
+						}
+					}
+				}
 				
 				//alert(numMatches);
 				if (numMatches > 1) {
