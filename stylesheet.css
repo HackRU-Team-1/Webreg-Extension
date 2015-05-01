@@ -1,20 +1,43 @@
 @font-face { 
-	font-family: 'Alternate-Gothic';
+	font-family: "Verdana";
 	font-style: normal;
 	font-weight: normal;
-	src: url('Alternate-Gothic.ttf'); 
+	/*src: url('Alternate-Gothic.ttf'); */
 }
 
 .popup{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
 	background-image: url("popupbg.png");
-	width: 160px;
-	font-family: 'Alternate-Gothic';
+	width: 300px;
+	font-family: 'Verdana';
 	padding-top: 20px;
-	padding-bottom: 28px;
-	font-size: 20px;
+	padding-bottom: 15px;
+	font-size: 15px;
 	font-weight: normal;
 	position: relative;
 	z-index: auto;
+}
+.popup .title{
+	font-weight: normal;
+	padding-bottom: 20px;
+	font-size: 27px;
+}
+.popup .explanation{
+	/*font-family: 'Verdana';*/
+	/*padding-left: 30px;*/
+	/*padding-right: 30px;*/
+	padding-bottom: 13px;
+	text-align: center;
+	width: 290px;
+}
+.popup .explanation img{
+	/*margin-right: 800px;*/
+}
+
+.popup .row{
+	font-style: italic;
 }
 
 .popup input {
@@ -23,7 +46,7 @@
 }
 
 .popup img {
-	padding-bottom: 20px;
+	padding-bottom: 15px;
 }
 .fpo-info-bubble .scoretext{
   font-family: "Verdana";

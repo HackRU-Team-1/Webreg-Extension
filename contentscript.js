@@ -203,7 +203,7 @@
         //alert(showRatingsLink); //should print newURL in console
 				//alert("after eventPage");
 				//alert(response.mainScore);
-				console.log(response.fullName + " : " + response.isMatch);
+				console.log(response.fullName);
 				// I don't think we even need response.isMatch anymore for this part.
 				// mainScore stores X.X or ?.? in addition to regular score when needed.
 				if(response.isMatch){
@@ -212,7 +212,7 @@
 					links[linkIndex].href = response.newURL;
 					  //hover window
 					  $('span#score'+linkIndex).hover(function(){
-						console.log("We're in WEBREG!!!!");
+						//console.log("We're in WEBREG!!!!");
 						if($(this).hasClass("hovered")){
 						}else{
 						  var scorePos = getPosition(this);
