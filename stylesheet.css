@@ -2,19 +2,19 @@
 	font-family: 'Alternate-Gothic';
 	font-style: normal;
 	font-weight: normal;
-	src: url('Alternate-Gothic.woff'); 
+	src: url('Alternate-Gothic.ttf'); 
 }
 
 .popup{
 	background-image: url("popupbg.png");
 	width: 160px;
-	font-family: sans-serif;
+	font-family: 'Alternate-Gothic';
 	padding-top: 20px;
 	padding-bottom: 28px;
 	font-size: 20px;
 	font-weight: normal;
-  position: relative;
-  z-index: auto;
+	position: relative;
+	z-index: auto;
 }
 
 .popup input {
@@ -33,7 +33,7 @@
 }
 
 .score{
-	font-size: 11px;
+  font-size: 11px;
   padding-left: 5px;
   padding-right: 6px;
   float: right;
