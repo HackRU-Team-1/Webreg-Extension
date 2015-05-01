@@ -5,7 +5,7 @@
   "description": "Places RateMyProfessors scores directly on Rutgers course websites",
   "icons": {"128": "logo.png"},
 
-  "version": "1.0.0.5",
+  "version": "1.0.0.6",
 
   "permissions": [
     "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*", "*://www.ratemyprofessors.com/*"
