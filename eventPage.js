@@ -66,22 +66,28 @@ function findListingProf(myURL, lastName, firstInitial, departmentName) {
 				}
 				
 				// MAKE THIS CHECKER BETTER
-				if(firstInitial != "not found"){
+				if (firstInitial != "not found") {
 					// Traverse through each name and check if first initial of first name and last name matches to instructor's name
 					for (var i = 0; i < listingProfs.length; i++) {
 						var reComma = listingProfs[i].getElementsByClassName("main")[0].innerHTML.split(", ",2);
-						if (reComma[1].charAt(0).toLowerCase() == firstInitial && reComma[0].toLowerCase() == lastName) {
+						//if (firstInitial.length == 1) {
+						//	if (reComma[1].charAt(0).toLowerCase() == firstInitial && reComma[0].toLowerCase() == lastName) {
+						//		index.push(i);
+						//		numMatches++;
+						//	}
+						//} 
+						if (reComma[1].toLowerCase().indexOf(firstInitial) == 0 && reComma[0].toLowerCase() == lastName) {
 							index.push(i);
 							numMatches++;
 						}
-					}	
-				}
+					}
+				}				
 				
 				//alert(numMatches);
 				if (numMatches > 1) {
 					// Last second check between departmentNames if there are multiple matches
 					for (var i = 0; i < index.length; i++) {
-						if (listingProfs[index[i]].getElementsByClassName("sub")[0].innerHTML.indexOf(departmentName) != -1) {
+						if (listingProfs[index[i]].getElementsByClassName("sub")[0].innerHTML.toLowerCase().indexOf(departmentName.toLowerCase()) != -1) {
 							index[0] = index[i];
 							numMatches = 1;
 							break;
