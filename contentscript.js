@@ -216,7 +216,7 @@
 						}else{
 						  var scorePos = getPosition(this);
 						  var xOffset = -67;
-						  var yOffset = -120;
+						  var yOffset = -110;
 						  var yPos = scorePos.y+yOffset;
 						  var xPos = scorePos.x+xOffset;
 						  //var yPos = scorePos.y;
@@ -295,11 +295,17 @@
 			//console.log(lastName.length);
 			
 			//Add the score to the instructors
-			instructors[i].appendChild(score);
+			var attach = instructors[i];
+			if(onCSP){
+				attach = instructors[i].previousSibling.previousSibling;
+				instructors[i].appendChild(document.createElement("scoreAdded"));
+			}
+			attach.appendChild(score);
 			
+						
+						
 		}
-    }
-    
+    } 
     
     
     
