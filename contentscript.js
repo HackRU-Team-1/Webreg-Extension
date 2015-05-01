@@ -212,6 +212,7 @@
 					links[linkIndex].href = response.newURL;
 					  //hover window
 					  $('span#score'+linkIndex).hover(function(){
+						console.log("We're in WEBREG!!!!");
 						if($(this).hasClass("hovered")){
 						}else{
 						  var scorePos = getPosition(this);
