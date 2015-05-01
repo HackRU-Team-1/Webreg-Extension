@@ -250,7 +250,7 @@
 							  gColor = "#66CC00";
 						  } else if (response.avGrade.charAt(0) == 'C'){
 							  gColor = "#E0C92A";
-						  }else if (response.avGrade.charAt(0) == 'D' || response.avGrade.charAt(0) == 'E' response.avGrade.charAt(0) == 'F'){
+						  } else if (response.avGrade.charAt(0) == 'D' || response.avGrade.charAt(0) == 'E' || response.avGrade.charAt(0) == 'F'){
 							  gColor = "#CF1D32";
 						  } else {
 							  gColor = "#A15595";
