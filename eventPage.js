@@ -1,5 +1,38 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {	
+	
+	if (request.Action == "getID") {
+	    //call chrome identity API
+	    chrome.identity.getProfileUserInfo( function(userInfo) {
+	        //userInfo holds email and id
+	        //userInfo.id is lifelong and unique
+	        sendResponse({Id: userInfo.id});
+	    });
+	    return true; //necessary for callback
+	}
 
+	if (request.Action == "isIdValid") {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = "https://apis.google.com/js/client.js?onload=callbackFunction";
+       
+        head.appendChild(script);
+       
+        gapi.client.setApiKey("AIzaSyB3ypAa-ZzGXr_xeihh5Nxxs3WDE3Og92A");
+        gapi.client.load('plus', 'v1', function() {
+          gapi.client.plus.people.get( {'userId' : request.Id} ).execute(function(resp) {
+            // Shows profile information
+            sendResponse({Response: resp});
+          })
+        });
+        return true;
+    }
+
+	if(request.Action != null && request.Action === "post"){
+		var status = post(request.Url, request.Json);
+		sendResponse({Data: "No Data", Status: status});
+		return;
+	}
 	//Parameters:
 	// request.oldURL
 	// request.firstInitial
@@ -182,5 +215,21 @@ function findScores(myURL) {
 		xmlhttp.send(); 
 		return responseArr;
 
-	}
+}
 
+function post(url, json){
+
+	var string = json;
+	xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-Type", "application/json");
+
+	xhr.onreadystatechange = function () {
+		var jsonparsed;
+		if (xhr.readyState == 4){
+	    	
+		}
+	};
+	xhr.send(string);
+	return xhr.status;
+}

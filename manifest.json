@@ -8,8 +8,10 @@
   "version": "1.1.0.1",
 
   "permissions": [
-    "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*", "*://www.ratemyprofessors.com/*"
+    "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*", "*://www.ratemyprofessors.com/*", "*://raritan.herokuapp.com/*", "*://www.apis.google.com/*", "identity", "identity.email"
   ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+
   "content_scripts": [
     {
 	  "matches": [ "*://sims.rutgers.edu/*", "*://sis.rutgers.edu/*"],
@@ -17,13 +19,22 @@
       "css": ["stylesheet.css"],
 
       "js": ["jquery-2.1.3.min.js", "contentscript.js"],
-	  "run_at": "document_end"
+  	  "run_at": "document_end",
+      "all_frames": true
     }
   ],
   "background": {
-	"scripts": ["jquery-2.1.3.min.js", "eventPage.js"],
+	"scripts": ["jquery-2.1.3.min.js", "eventPage.js", "gapi-client.js"],
 	"persistent": false
   },
+
+  "oauth2": {
+    "client_id": "392198836218-3io6qcpglqob3fkpga9jk7cmqd3vdvgj.apps.googleusercontent.com",
+    "scopes": [
+      "https://apis.google.com/js/client.js?onload=callbackFunction"
+    ]
+  },
+
   "browser_action": {
     "default_icon": "logo.png",
     "default_popup": "popup.html"

@@ -19,6 +19,7 @@
 	position: relative;
 	z-index: auto;
 }
+
 .popup .title{
 	font-weight: normal;
 	padding-bottom: 20px;
@@ -48,13 +49,13 @@
 .popup img {
 	padding-bottom: 15px;
 }
+
 .fpo-info-bubble .scoretext{
   font-family: "Verdana";
   font-size: 11px;
   padding-top: 5px;
   
 }
-
 .score{
   font-size: 11px;
   padding-left: 5px;
@@ -138,3 +139,346 @@
 =======
 }
 >>>>>>> fd4943d87527d81d0eb746cae0f8e63e8264ae4f
+
+.rating{
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000000;
+  background-image: url("");
+  width: 300px;
+  font-family: 'Arial ';
+  padding-top: 20px;
+  padding-bottom: 15px;
+  font-size: 15px;
+  font-weight: normal;
+  z-index: auto;
+  border-radius: 8px; 
+  
+}
+
+@font-face {
+    font-family: LemonMilk;
+    src: url(LemonMilk.otf);
+}
+
+.rating .title{
+  font-family: Verdana;
+  font-weight: normal;
+  font-size: 24px;
+  text-align: center;
+  color: #000000; 
+  margin-bottom: 10px;
+
+}
+.titlerow {
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 5px;
+  padding-bottom: 1px;
+  margin-bottom: 0px;
+  border-radius: 12px;
+}
+
+.starRating form{
+  width:auto;
+  display:none;
+  display         : block;
+  float           : right;
+  position        : relative;
+  text-align: none;
+}
+
+.starRating:not(old){
+  position       : relative;
+  display        : inline-block;
+  width          : 7.5em;
+  height         : 1.5em;
+  overflow       : hidden;
+  vertical-align : bottom;
+}
+.starRating:not(old) > input{
+  position     : relative;
+  margin-right : -100%;
+  opacity      : 0;
+}
+.starRating:not(old) > label{
+  display         : block;
+  float           : right;
+  position        : relative;
+  background      : url('https://i.imgur.com/pjWlNKp.png');
+  background-size : contain;
+}
+.starRating:not(old) > label:before{
+  content         : '';
+  display         : block;
+  width           : 1.5em;
+  height          : 1.5em;
+  background      : url('https://i.imgur.com/Orryxmx.png');
+  background-size : contain;
+  opacity         : 0;
+  transition      : opacity 0.2s linear;
+}
+.starRating:not(old) > label:hover:before,
+.starRating:not(old) > label:hover ~ label:before,
+.starRating:not(:hover) > :checked ~ label:before{
+  opacity : 1;
+}
+
+.reset {
+  padding-top: 2px;
+  display:none;
+  background-image: url('http://i.imgur.com/zl9ShM2.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  height: 30px;
+  width: 30px;
+  border: none;
+}
+
+.rating {
+  border-style: solid;
+  border-color: #B50E22;
+  border-width: 0px;
+  background-color: #ffffff;
+  width: 320px;
+  font-family: 'Verdana';  
+  overflow:auto;
+  padding-top: 10px;
+  font-size: 15px;
+  font-weight: normal;
+  z-index: auto;
+}
+
+.numratings{
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 10px;
+  font-family: 'Verdana';
+}
+.dept{
+  text-align: center;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  font-family: 'Verdana';
+  text-transform: none;
+}
+
+.ratings {
+  position:relative;
+  background-color: #ffffff;
+  height:170px;
+  width: 65%;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.review {
+  font-size: 11px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.reviewtext {
+  margin-top: 5px;
+  font-family: 'Verdana';  
+  font-size: 11px;
+  width: 80%;
+  height: 90px;
+  -moz-border-radius: 12px;
+  border-radius: 8px;
+  /*border:solid 1px black;*/
+  padding:10px;
+  resize: none;
+}
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+.tags {
+  text-align: center;
+  position:relative;
+  height:160px;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+.checkbox-grid li {
+    display: block;
+    float: left;
+}
+.check_box {
+    display:none;
+}
+.reseti {
+  position:relative;
+  align-content: center;
+  top: 2px;
+}
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input[type=checkbox] {
+    display:none;
+}
+input[type=checkbox] + label
+{
+    display:inline-block;   
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 5px;  
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
+    font-size: 10px;
+    background: #DBDBDB ;
+    transition: background .2s;
+}
+input[type=checkbox]:checked + label
+{
+      display:inline-block;      
+      text-align: center;
+      border-radius: 3px;
+      background: #FFEC6E;
+}
+
+.tags input[type=radio] {
+    display:none;
+}
+.tags input[type=radio] + label
+{
+    display:inline-block;   
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 5px;  
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
+    font-size: 10px;
+    background: #DBDBDB ;
+    transition: background .2s;
+}
+.tags input[type=radio]:checked + label
+{
+      display:inline-block;      
+      text-align: center;
+      border-radius: 3px;
+      background: #FFEC5E;
+}
+
+
+.ratings-row-1 {
+
+  position:relative;
+  vertical-align: center;
+  height:12px;
+  left: 20%;
+  margin: 0 auto;
+}
+.ratings-row-2 {
+  position:relative;
+  vertical-align: center;
+  height:12px;
+  left: 20%;
+  margin: 0 auto;
+}
+.ratings-row-3 {
+  position:relative;
+  vertical-align: center;
+  height:12px;
+  left: 20%;
+  margin: 0 auto;
+}
+
+.score1 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 12px;
+  padding-top: 5px;
+}
+
+.tagsexplan {
+  text-align: center;
+  font-size: 10px;
+  padding-bottom: 7px;
+}
+
+.submitbutton {
+  text-align: center;
+  padding-bottom: 20px;
+}
+hr{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 6px;
+    margin-top: 6px;  
+}
+
+/* The Modal (background) */
+.modal {
+    /*display: none;*/
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 15% from the top and centered */
+    /*padding: 10px;*/
+    border: 1px solid #888;
+    width: 320px; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    margin-right: 5px;
+    font-weight: bold;
+    font-family: Verdana;
+}
+ 
+.close:hover,
+.close:focus {
+    color: grey;
+    text-decoration: none;
+    cursor: pointer;
+}
+span.instructors {
+    margin-left: 3px;
+    width: 120px;
+    margin-right: 50px;
+}

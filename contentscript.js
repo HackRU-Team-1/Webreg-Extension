@@ -1,4 +1,7 @@
+var realid = null;
+
 (function refresh() {
+
     var instructors = document.getElementsByClassName("instructors");
 	var iframe = document.getElementById("iframe2"); // for WebReg
 	if (iframe != null) { // if iframe exists (w++ebreg), then get that info
@@ -40,7 +43,7 @@
 		if (iframe != null) {
 			var iframewindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
 			instructors = iframewindow.document.getElementsByClassName("instructors");
-		}		
+		}
 	}
 	
 	//If on CSP, has to get td elements and filter out non-instructors instead
@@ -90,7 +93,7 @@
 		
 	}
 	var check = 0;
-    console.log( "refreshed");	
+    //console.log( "refreshed");	
 	//Loop through list that was chosen above
 	var links = new Array();
 	var linkIndex = 0;
@@ -123,12 +126,13 @@
 				score.style.marginLeft = "10px";
 			}
       
-      
 			
 			score.style.fontSize = "15px";
 			
 			//Get lastname from current element
 			var lastName = instructors[i].innerHTML;
+
+			var profname1 = lastName;
 			//console.log(lastName);
 			//console.log(lastName.length);
 			lastName = lastName.toLowerCase();
@@ -197,13 +201,13 @@
 			//alert("right before eventPage");
 			
 			//console.log(lastName + " " + firstInitial + " " + departmentName);
-			console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex + " " + firstInitial);
+			//console.log("1: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex + " " + firstInitial);
 			chrome.runtime.sendMessage({oldURL: link1, lastName: lastName, firstInitial: firstInitial, departmentName: departmentName}, function(response) {
 				
         //alert(showRatingsLink); //should print newURL in console
 				//alert("after eventPage");
 				//alert(response.mainScore);
-				console.log(response.fullName);
+				//console.log(response.fullName);
 				// I don't think we even need response.isMatch anymore for this part.
 				// mainScore stores X.X or ?.? in addition to regular score when needed.
 				if(response.isMatch){
@@ -290,14 +294,14 @@
 				}
 				
 				
-				console.log(linkIndex);
+				//console.log(linkIndex);
 				linkIndex++;
 				//console.log("2: " + lastName + " " + links[linkIndex].innerHTML + " : " + links[linkIndex].href + " " + linkIndex);
 							
 				
 			});
 			//sleep(1000);
-			console.log("3: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex);
+			//console.log("3: " + lastName + " " + link.innerHTML + " : " + link.href + " " + linkIndex);
 			link.target = "_blank";	
 	
 			//Add the link to score
@@ -314,7 +318,71 @@
 				instructors[i].appendChild(document.createElement("scoreAdded"));
 			}
 			attach.appendChild(score);
+			instructors[i].style += "margin-right: 80px;";
+
+		 	var url = "http://raritan.herokuapp.com/fpo/1/Rutgers%20University%20-%20New%20Brunswick/";
+		 	var deptname = encodeURIComponent(toTitleCase(departmentName));
+		 	url += deptname + "/";
+		 	var profname = encodeURIComponent(toTitleCase(profname1));
+		 	url += profname;
+			/*
+		 	chrome.runtime.sendMessage({Action: "post", Json: null, Url: url}, function(response){
+				
+			});
+			*/
+
+
+
+			var vote = document.createElement("input");
+			vote.type = "image";
+			vote.src="https://i.imgur.com/LVricm1.png";
+			vote.width="30";
+			vote.height="21";
+			vote.style="margin-left: 10px; top: 7px; margin-right: 20px; position: relative;";
+	
+			vote.profname = lastName;
+			vote.fullname = profname1;
+
+			vote.onclick= function(){
+				var form = document.createElement("div");
+				form.id="myModal";
+				form.class = "modal";
+				document.body.appendChild(form);
+
+				document.getElementById("myModal").innerHTML = "<div class=\"modal-content\">    	<span class=\"close\">X</span>    <div class=\"rating\">	    <div class=\"titlerow\">				  <div class =\"title\"><div id=\"profname\" class=\"prof\"></div><div id=\"deptname\" class=\"dept\"></div></div>		    </div>		<div class=\"ratings\">			<div class = \"tagsexplan unselectable\">Rate your professor:</div>				  	<div class =\"score1 unselectable\">Easiness</div>			<div class = \"ratings-row-1\">					<form id=\"form1\" action=\"\">					<!--					<img src = \"http://i.imgur.com/zl9ShM2.png\" width = \"15\" height = \"15\" title = \"Clear\" class=\"reseti\"></img>					<input class = \"reset\" type=\"reset\" value=\"Reset\" id=\"reset1\">					-->					<span class=\"starRating\">												<input id=\"rating5\" type=\"radio\" name=\"rating1\" value=\"5\">							<label for=\"rating5\">5</label>							<input id=\"rating4\" type=\"radio\" name=\"rating1\" value=\"4\">							<label for=\"rating4\">4</label>							<input id=\"rating3\" type=\"radio\" name=\"rating1\" value=\"3\">							<label for=\"rating3\">3</label>							<input id=\"rating2\" type=\"radio\" name=\"rating1\" value=\"2\">							<label for=\"rating2\">2</label>							<input id=\"rating1\" type=\"radio\" name=\"rating1\" value=\"1\">							<label for=\"rating1\">1</label>										</span>					</form>			</div>			</br>		  	<div class =\"score1 unselectable\">Clarity</div>			<div class = \"ratings-row-2\">				<form id=\"form2\" action=\"\">					<!--					<img src = \"http://i.imgur.com/zl9ShM2.png\" width = \"15\" height = \"15\" title = \"Clear\" class=\"reseti\"></img>					<input class = \"reset\" type=\"reset\" value=\"Reset\" id=\"reset2\">					-->					<span class=\"starRating\">												<input id=\"rating5-1\" type=\"radio\" name=\"rating2\" value=\"5\">							<label for=\"rating5-1\">5</label>							<input id=\"rating4-1\" type=\"radio\" name=\"rating2\" value=\"4\">							<label for=\"rating4-1\">4</label>							<input id=\"rating3-1\" type=\"radio\" name=\"rating2\" value=\"3\">							<label for=\"rating3-1\">3</label>							<input id=\"rating2-1\" type=\"radio\" name=\"rating2\" value=\"2\">							<label for=\"rating2-1\">2</label>							<input id=\"rating1-1\" type=\"radio\" name=\"rating2\" value=\"1\">							<label for=\"rating1-1\">1</label>										</span>						</form>			</div>			</br>		  	<div class =\"score1 unselectable\">Helpfulness</div>			<div class = \"ratings-row-3\">				<form id=\"form3\" action=\"\">					<!--					<img src = \"http://i.imgur.com/zl9ShM2.png\" width = \"15\" height = \"15\" title = \"Clear\" class=\"reseti\"></img>					<input class = \"reset\" type=\"reset\" value=\"Reset\" id=\"reset3\">					-->					<span class=\"starRating\">												<input id=\"rating5-2\" type=\"radio\" name=\"rating3\" value=\"5\">							<label for=\"rating5-2\">5</label>							<input id=\"rating4-2\" type=\"radio\" name=\"rating3\" value=\"4\">							<label for=\"rating4-2\">4</label>							<input id=\"rating3-2\" type=\"radio\" name=\"rating3\" value=\"3\">							<label for=\"rating3-2\">3</label>							<input id=\"rating2-2\" type=\"radio\" name=\"rating3\" value=\"2\">							<label for=\"rating2-2\">2</label>							<input id=\"rating1-2\" type=\"radio\" name=\"rating3\" value=\"1\">							<label for=\"rating1-2\">1</label>										</span>					</form>			</div>					</div>		</br>		<div class = \"tagsexplan unselectable\">Tag some traits that match this professor (optional):</div>		<div class = \"tags\">			<form id=\"form4\">						<input name='trait1' type='radio' id=\"interesting1\"/><label class=\"unselectable\" for=\"interesting1\">Boring</label>				<input name='trait1' type='radio' id=\"interesting2\"/><label class=\"unselectable\" for=\"interesting2\">Interesting</label>			</form>				<hr width=\"20%\">			<form id=\"form5\">				<input name='trait2' type='radio' id=\"work1\"/><label class=\"unselectable\" for=\"work1\">Manageable Work</label>					<input name='trait2' type='radio' id=\"work2\"/><label class=\"unselectable\" for=\"work2\">A Lot Of Work</label>			</form>				<hr width=\"20%\">			<form id=\"form6\">				<input name='trait3' type='radio' id=\"organization1\"/><label class=\"unselectable\" for=\"organization1\">Disorganized</label>				<input name='trait3' type='radio' id=\"organization2\"/><label class=\"unselectable\" for=\"organization2\">Organized</label>			</form>				<hr width=\"20%\">			<form id=\"form7\">				<input name='trait4' type='radio' id=\"pacing1\"/><label class=\"unselectable\" for=\"pacing1\">Too Slow</label>				<input name='trait4' type='radio' id=\"pacing2\"/><label class=\"unselectable\" for=\"pacing2\">Well Paced</label>				<input name='trait4' type='radio' id=\"pacing3\"/><label class=\"unselectable\" for=\"pacing3\">Too Fast</label>			</form>		</div><!--		<div class = \"review unselectable\">			Enter your review here:</br>			<textarea type=\"text\" name=\"reviewtext\" class=\"reviewtext\" maxlength=\"140\" rows=\"10\" cols=\"80\" spellcheck=\"false\"></textarea>		</div>-->		<p>		<div class = \"submitbutton\">		<button id=\"submitButton\" type=\"button\">Submit</button>		</div>	    <div id=\"status\"></div>	    <img id=\"image-result\" hidden>	</div>		<script type=\"text/javascript\">        var allRadios = document.getElementsByName('trait1');        var booRadio1;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio1 == this){                    this.checked = false;                    booRadio1 = null;                }else{                    booRadio1 = this;                }            };        }        var allRadios = document.getElementsByName('trait2');        var booRadio2;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio2 == this){                    this.checked = false;                    booRadio2 = null;                }else{                    booRadio2 = this;                }            };        }        var allRadios = document.getElementsByName('trait3');        var booRadio3;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio3 == this){                    this.checked = false;                    booRadio3 = null;                }else{                    booRadio3 = this;                }            };        }        var allRadios = document.getElementsByName('trait4');        var booRadio4;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio4 == this){                    this.checked = false;                    booRadio4 = null;                }else{                    booRadio4 = this;                }            };        }    </script>        </div>";
+
+				var scr = document.createElement("script");
+				scr.innerHTML="var allRadios = document.getElementsByName('trait1');        var booRadio1;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio1 == this){                    this.checked = false;                    booRadio1 = null;                }else{                    booRadio1 = this;                }            };        }        var allRadios = document.getElementsByName('trait2');        var booRadio2;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio2 == this){                    this.checked = false;                    booRadio2 = null;                }else{                    booRadio2 = this;                }            };        }        var allRadios = document.getElementsByName('trait3');        var booRadio3;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio3 == this){                    this.checked = false;                    booRadio3 = null;                }else{                    booRadio3 = this;                }            };        }        var allRadios = document.getElementsByName('trait4');        var booRadio4;        var x = 0;        for(x = 0; x < allRadios.length; x++){            allRadios[x].onclick = function() {                if(booRadio4 == this){                    this.checked = false;                    booRadio4 = null;                }else{                    booRadio4 = this;                }            };        }";
+
+				document.body.appendChild(scr);
+				document.getElementById("submitButton").addEventListener("click", submit);
+
+				var modal = document.getElementById('myModal');
+				var span = document.getElementsByClassName("close")[0];
+				
+				modal.style = ".starRating:not(old){  position       : relative;  display        : inline-block;  width          : 7.5em;  height         : 1.5em;  overflow       : hidden;  vertical-align : bottom;}.starRating:not(old) > input{  position     : relative;  margin-right : -100%;  opacity      : 0;}.starRating:not(old) > label{  display         : block;  float           : right;  position        : relative;  background      : url('https://i.imgur.com/pjWlNKp.png');  background-size : contain;}.starRating:not(old) > label:before{  content         : '';  display         : block;  width           : 1.5em;  height          : 1.5em;  background      : url('https://i.imgur.com/Orryxmx.png');  background-size : contain;  opacity         : 0;  transition      : opacity 0.2s linear;}.starRating:not(old) > label:hover:before,.starRating:not(old) > label:hover ~ label:before,.starRating:not(:hover) > :checked ~ label:before{  opacity : 1;} display: none;    position: fixed; /* Stay in place */    z-index: 1; /* Sit on top */    left: 0;    top: 0;    width: 100%; /* Full width */    height: 100%; /* Full height */    overflow: auto; /* Enable scroll if needed */    background-color: rgb(0,0,0); /* Fallback color */    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */";
+
+				modal.style.display = "block";
+				
+				document.getElementById("profname").innerHTML = toTitleCase(this.fullname).replace(/&Amp;/g, '&');
+
+				document.getElementById("deptname").innerHTML = toTitleCase(departmentName).replace(/&Amp;/g, '&');
 			
+
+				
+				span.onclick = function() {
+					modal.remove();
+				}
+				
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.remove();
+					}
+				}
+			};
+
+			vote.alt="Rate this professor";
+			attach.appendChild(vote);
 						
 						
 		}
@@ -347,4 +415,174 @@ function getPosition(element) {
 
 }
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
+function submit(){
+
+ 	var form1 = document.getElementsByName('rating1');
+ 	var form2 = document.getElementsByName('rating2');
+ 	var form3 = document.getElementsByName('rating3');
+ 	var trait1 = document.getElementsByName('trait1');
+ 	var trait2 = document.getElementsByName('trait2');
+ 	var trait3 = document.getElementsByName('trait3');
+ 	var trait4 = document.getElementsByName('trait4');
+
+ 	var string = "{\"score\": {" ;
+
+ 	var check = 0;
+ 	var i;
+ 	//jank central
+ 	var last = false;
+ 	for (i = 0; i < form1.length; i++) {
+ 		if(form1[i].checked){
+ 			check++;
+ 			if(last){
+ 				string+=",";
+ 			}
+ 			last = true;
+ 			string+= "\"easiness\": " + (5-i).toString();
+ 		}
+ 	}
+ 	for (i = 0; i < form2.length; i++) {
+ 		if(form2[i].checked){
+ 			check++;
+ 			if(last){
+ 				string+=",";
+ 			}
+ 			last = true;
+ 			string+= "\"clarity\": " + (5-i).toString();
+ 		}
+ 	}
+ 	for (i = 0; i < form3.length; i++) {
+ 		if(form3[i].checked){
+ 			check++;
+ 			if(last){
+ 				string+=",";
+ 			}
+ 			last = true;
+ 			string+= "\"helpfulness\": " + (5-i).toString();
+ 		}
+ 	}
+
+ 	if(check < 3){
+ 		if(document.getElementById("lessThanThreeCheck") != null){
+ 			return false;
+ 		}
+		var para1 = document.createElement("p");
+		para1.id = "lessThanThreeCheck";
+		para1.innerHTML = "<div class = \"tagsexplan unselectable\">Please fill in all of the star ratings.</div>";
+		document.getElementById("submitButton").parentNode.appendChild(para1);
+		return false;
+ 	}
+
+	var loadinggif = document.createElement("img");
+	loadinggif.src = "https://i.imgur.com/OYqoFS3.gif";
+	loadinggif.alt = "Submitting...";
+	loadinggif.id = "loadinggif";
+	loadinggif.height = "50";
+	loadinggif.width = "50";
+
+	var para = document.createElement("p");
+
+	document.getElementById("submitButton").parentNode.appendChild(para);
+	document.getElementById("submitButton").parentNode.appendChild(loadinggif);
+
+ 	for (i = 0; i < trait1.length; i++) {
+ 		if(trait1[i].checked){
+ 			if(last){
+ 				string+=",";
+ 			}
+ 			last = true;
+ 			string+= "\"interesting\": ";
+ 			if(trait1[i].id == "interesting1"){
+ 				string+="1";
+ 			} else if(trait1[i].id == "interesting2"){
+ 				string+="2";
+ 			}
+ 		}
+ 	}
+ 	for (i = 0; i < trait2.length; i++) {
+ 		if(trait2[i].checked){
+ 			if(last){
+ 				string+=",";
+ 			}
+ 			last = true;
+ 			string+= "\"work\": ";
+ 			if(trait2[i].id == "work1"){
+ 				string+="1";
+ 			} else if(trait2[i].id == "work2"){
+ 				string+="2";
+ 			}
+ 		}
+ 	}
+ 	for (i = 0; i < trait3.length; i++) {
+ 		if(trait3[i].checked){
+ 			if(last){
+ 				string+=",";
+ 			}
+ 			last = true;
+ 			string+= "\"organization\": ";
+ 			if(trait3[i].id == "organization1"){
+ 				string+="1";
+ 			} else if(trait3[i].id == "organization2"){
+ 				string+="2";
+ 			}
+ 		}
+ 	}
+ 	for (i = 0; i < trait4.length; i++) {
+ 		if(trait4[i].checked){
+ 			if(last){
+ 				string+=",";
+ 			}
+ 			last = true;
+ 			string+= "\"pacing\": ";
+ 			if(trait4[i].id == "pacing1"){
+ 				string+="1";
+ 			} else if(trait4[i].id == "pacing2"){
+ 				string+="2";
+ 			} else if(trait4[i].id == "pacing3"){
+ 				string+="3";
+ 			}
+ 		}
+ 	}
+
+ 	string += "}, \"user_id\":\"";
+
+	var id = null;
+
+	if(realid != null){   
+	 	post(string);		
+	} else {
+		chrome.runtime.sendMessage({Action: "getID"}, function(response) {
+		    id = response.Id;
+		    chrome.runtime.sendMessage({Action: "isIdValid", Id: id}, function(response) {
+		    	if(!response){
+		    	}
+		        if(response.Response.code != '404'){	
+					realid = id;        
+				 	post(string);
+		        } else {
+		        }
+		    });
+		});
+	}
+}
+
+function post(string){
+	string += realid + "\"}";
+ 	var url = "http://raritan.herokuapp.com/fpo/1/Rutgers%20University%20-%20New%20Brunswick/";
+ 	var deptname = encodeURIComponent(document.getElementsByClassName("dept")[0].innerText);
+ 	url += deptname + "/";
+ 	var profname = encodeURIComponent(document.getElementsByClassName("prof")[0].innerText);
+ 	url += profname + "/";
+ 	url += "scores";
+ 	//url += document.getElementsByClass("title").innerText;
+
+	chrome.runtime.sendMessage({Action: "post", Json: string, Url: url}, function(response){
+		document.getElementById("loadinggif").remove();
+		document.getElementById("myModal").remove();
+	});
+}
