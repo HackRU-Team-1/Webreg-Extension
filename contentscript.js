@@ -335,9 +335,9 @@ var realid = null;
 
 			var vote = document.createElement("input");
 			vote.type = "image";
-			vote.src="https://i.imgur.com/LVricm1.png";
-			vote.width="30";
-			vote.height="21";
+			vote.src = "http://i.imgur.com/pdAqymT.png";
+			vote.width="40";
+			vote.height="28";
 			vote.style="margin-left: 10px; top: 7px; margin-right: 20px; position: relative;";
 	
 			vote.profname = lastName;
